@@ -132,27 +132,11 @@ p{margin:0 0 1em}
     linear-gradient(115deg,rgba(150,134,102,.34),rgba(120,116,100,.2));
   mix-blend-mode:multiply;
 }
-/* clean layer on top, revealed left→right */
-.layer-clean{clip-path:inset(0 calc(100% - var(--wipe)) 0 0)}
+/* clean layer shown as a single static image */
+.layer-clean{clip-path:none}
 .layer-clean img{filter:saturate(1.06) contrast(1.06) brightness(1.04)}
+.layer-dirty{display:none}
 
-/* the blade */
-.blade{
-  position:absolute;top:0;bottom:0;left:var(--wipe);width:3px;margin-left:-1.5px;z-index:3;
-  background:linear-gradient(180deg,var(--gold-lt),var(--gold));
-  box-shadow:0 0 22px 3px rgba(216,163,63,.55);
-  cursor:ew-resize;touch-action:none;
-}
-.blade::before{ /* grip */
-  content:"";position:absolute;top:50%;left:50%;translate:-50% -50%;
-  width:60px;height:60px;border-radius:50%;
-  background:var(--gold);border:3px solid #fff6e3;
-  box-shadow:var(--shadow-lg);
-}
-.blade::after{ /* arrows */
-  content:"⟷";position:absolute;top:50%;left:50%;translate:-50% -50%;
-  font:700 20px/1 var(--sans);color:var(--ink);
-}
 .hero-scrim{
   position:absolute;inset:0;z-index:2;pointer-events:none;
   background:linear-gradient(180deg,rgba(11,27,43,.72) 0%,rgba(11,27,43,.38) 42%,rgba(11,27,43,.86) 100%);
@@ -254,49 +238,43 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .dock .btn{flex:1;min-height:52px;font-size:1rem}
 
 /* ---------- 5. LANDING (ad page) ---------- */
-.lp{background:var(--pane);min-height:100vh}
-.lp-top{padding:1.5rem 0 0;display:flex;justify-content:center}
-.lp-top img,.lp-top svg{height:52px;width:auto}
-.lp-head{text-align:center;padding:1.6rem 0 .4rem}
-.lp-head h1{font-size:clamp(2.2rem,8.4vw,3.5rem);max-width:15ch;margin-inline:auto}
+.lp{background:var(--pane);min-height:100svh;padding-bottom:.6rem}
+.lp-top{padding:.45rem 0 0;display:flex;justify-content:center}
+.lp-top img,.lp-top svg{height:40px;width:auto}
+.lp-head{text-align:center;padding:.5rem 0 0}
+.lp-head h1{font-size:clamp(1.6rem,7vw,2.05rem);max-width:13ch;margin-inline:auto}
 .lp-head h1 em{font-style:normal;color:var(--azure)}
-.lp-head p{font-size:1.14rem;max-width:32ch;margin:1rem auto 0;color:var(--body)}
+.lp-head p{font-size:.9rem;max-width:29ch;margin:.3rem auto 0;color:var(--body)}
 .lp-badge{
-  display:inline-flex;align-items:center;gap:.5em;margin-bottom:1.2rem;
+  display:inline-flex;align-items:center;gap:.5em;margin-bottom:.55rem;
   background:rgba(46,119,180,.1);color:var(--deep);border-radius:999px;
-  padding:.45em 1em;font:600 .8rem/1 var(--sans);letter-spacing:.06em;
+  padding:.3em .75em;font:600 .72rem/1 var(--sans);letter-spacing:.06em;
 }
 .lp-badge::before{content:"";width:8px;height:8px;border-radius:50%;background:#2FA36B}
-.lp-proof{
-  display:flex;justify-content:center;flex-wrap:wrap;gap:.4rem 1.4rem;
-  padding:1.4rem 0 0;font-size:.9rem;font-weight:600;color:var(--deep);
-}
-.lp-proof span{display:flex;align-items:center;gap:.4em}
-.lp-proof svg{width:17px;height:17px;color:var(--gold)}
-.lp-foot{text-align:center;padding:2.5rem 0 3rem;font-size:.86rem;color:#7b8896}
+.lp-foot{text-align:center;padding:.7rem 0 0;font-size:.78rem;color:#7b8896}
 .lp-foot a{color:var(--deep);font-weight:600}
 
 /* ---------- 6. FUNNEL ---------- */
 .funnel{
-  max-width:520px;margin:2rem auto 0;background:var(--white);
+  max-width:520px;margin:.7rem auto 0;background:var(--white);
   border-radius:20px;box-shadow:var(--shadow-lg);border:1px solid var(--rule);
   overflow:hidden;
 }
 .fn-bar{height:6px;background:#e2eaef}
 .fn-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--azure),var(--gold));transition:width .4s cubic-bezier(.2,.7,.3,1)}
-.fn-body{padding:1.7rem 1.4rem 1.9rem}
+.fn-body{padding:1rem .95rem 1.05rem}
 .fn-step{display:none}
 .fn-step.is-active{display:block;animation:slideIn .34s cubic-bezier(.2,.7,.3,1)}
 @keyframes slideIn{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-.fn-count{font:600 .74rem/1 var(--sans);letter-spacing:.17em;text-transform:uppercase;color:var(--azure);margin-bottom:.7rem}
-.fn-q{font-family:var(--display);font-weight:600;font-size:1.62rem;line-height:1.14;color:var(--ink);margin:0 0 .4rem;font-variation-settings:"SOFT" 20,"WONK" 1}
-.fn-help{font-size:.95rem;color:#6d7d8c;margin:0 0 1.2rem}
+.fn-count{font:600 .68rem/1 var(--sans);letter-spacing:.17em;text-transform:uppercase;color:var(--azure);margin-bottom:.5rem}
+.fn-q{font-family:var(--display);font-weight:600;font-size:1.25rem;line-height:1.14;color:var(--ink);margin:0 0 .3rem;font-variation-settings:"SOFT" 20,"WONK" 1}
+.fn-help{font-size:.84rem;color:#6d7d8c;margin:0 0 .75rem}
 
 /* choice cards */
-.opts{display:grid;gap:.7rem}
+.opts{display:grid;gap:.6rem}
 .opt{
   display:flex;align-items:center;gap:1rem;width:100%;text-align:left;
-  min-height:var(--tap);padding:1rem 1.1rem;border:2px solid #dbe5ec;background:var(--white);
+  min-height:44px;padding:.72rem .85rem;border:2px solid #dbe5ec;background:var(--white);
   border-radius:var(--r);transition:border-color .15s,background .15s,transform .12s;
 }
 .opt:hover{border-color:var(--azure);background:#f6fafc}
@@ -312,15 +290,15 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .opt.is-on .tick{background:var(--azure);border-color:var(--azure);color:#fff}
 
 /* stepper */
-.stepper{display:flex;align-items:center;justify-content:center;gap:1.2rem;margin:.4rem 0 1.1rem}
+.stepper{display:flex;align-items:center;justify-content:center;gap:1rem;margin:.25rem 0 .8rem}
 .stepper button{
-  width:66px;height:66px;border-radius:50%;border:2px solid var(--deep);background:var(--white);
-  font:400 2rem/1 var(--sans);color:var(--deep);display:grid;place-items:center;
+  width:56px;height:56px;border-radius:50%;border:2px solid var(--deep);background:var(--white);
+  font:400 1.8rem/1 var(--sans);color:var(--deep);display:grid;place-items:center;
 }
 .stepper button:hover{background:var(--deep);color:#fff}
-.stepper output{font-family:var(--display);font-weight:700;font-size:3.6rem;color:var(--ink);min-width:2.6ch;text-align:center;font-variant-numeric:tabular-nums}
-.chips{display:flex;flex-wrap:wrap;gap:.5rem;justify-content:center;margin-bottom:1.2rem}
-.chip{border:1.5px solid #dbe5ec;background:#fff;border-radius:999px;padding:.6em 1.15em;font-weight:600;font-size:.94rem;color:var(--deep);min-height:44px}
+.stepper output{font-family:var(--display);font-weight:700;font-size:3rem;color:var(--ink);min-width:2.6ch;text-align:center;font-variant-numeric:tabular-nums}
+.chips{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-bottom:.9rem}
+.chip{border:1.5px solid #dbe5ec;background:#fff;border-radius:999px;padding:.5em .95em;font-weight:600;font-size:.9rem;color:var(--deep);min-height:40px}
 .chip:hover,.chip.is-on{border-color:var(--azure);background:#eef6fc}
 
 /* fields */
@@ -383,6 +361,17 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 }
 @media (max-width:560px){
   .topbar .tel-link{display:none}
+  .lp{min-height:100svh;padding-bottom:.45rem}
+  .lp-top{padding:.35rem 0 0}
+  .lp-head{padding:.35rem 0 0}
+  .lp-head h1{font-size:clamp(1.45rem,6.6vw,1.8rem);max-width:12ch}
+  .lp-head p{display:none}
+  .funnel{margin:.3rem auto 0}
+  .fn-body{padding:.8rem .75rem .9rem}
+  .fn-q{font-size:1.1rem}
+  .fn-help{margin-bottom:.6rem;font-size:.8rem}
+  .opt{min-height:42px;padding:.65rem .8rem}
+  .fn-nav{margin-top:.8rem}
 }
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
@@ -413,8 +402,6 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
     <div class="hero-media" id="wipeZone">
       <div class="layer layer-dirty"><img data-photo="hero" alt="" aria-hidden="true"></div>
       <div class="layer layer-clean"><img data-photo="hero" alt="A Window Wizard technician cleaning a home's windows in Austin"></div>
-      <div class="blade" id="blade" role="slider" tabindex="0"
-           aria-label="Drag to clean the window" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0"></div>
     </div>
     <div class="hero-scrim"></div>
     <div class="hero-inner">
@@ -427,7 +414,6 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         </div>
       </div>
     </div>
-    <p class="hero-hint"><b>Drag</b> the handle across the glass</p>
   </section>
 
   <div class="track"></div>
@@ -572,13 +558,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <div class="lp-head">
         <span class="lp-badge">Booking mornings this week</span>
         <h1>Your Austin windows, cleaned <em>this week</em>.</h1>
-        <p>Answer 6 quick questions. Your price shows up right here — no callback, no sales visit.</p>
-      </div>
-
-      <div class="lp-proof">
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Screens, tracks &amp; sills included</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Streak-free or we redo it</span>
-        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M20 6 9 17l-5-5"/></svg>Licensed &amp; insured</span>
+        <p>Get a fast, clear price in minutes — no callback, no sales visit.</p>
       </div>
 
       <!-- ===== FUNNEL ===== -->
@@ -741,16 +721,16 @@ const BIZ = {
 
 // Logo: paste your base64 data URI (data:image/png;base64,...) or a file path.
 // Leave empty and a stand-in mark renders instead.
-const LOGO_SRC = "";
+const LOGO_SRC = "logo.png";
 
 // Your photos. Drop the files next to this HTML and put the filenames here.
 const PHOTOS = {
-  hero:  "",   // ← best shot of you working. Wide, you in frame, glass visible.
-  work1: "",
-  work2: "",
-  work3: "",
-  work4: "",
-  work5: ""
+  hero:  "images/hero.png",
+  work1: "images/IMG_2912.png",
+  work2: "images/IMG_2918.png",
+  work3: "images/IMG_2946.png",
+  work4: "images/IMG_2950.png",
+  work5: "images/IMG_2959.png"
 };
 
 // ── PRICING ──────────────────────────────────────────────────
@@ -817,50 +797,11 @@ addEventListener("hashchange", route);
 route();
 
 /* ============================================================
-   HERO — drag the squeegee
+   HERO — static background image
    ============================================================ */
 (function(){
-  const zone = $("#wipeZone"), blade = $("#blade");
-  if(!zone) return;
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  let dragging = false;
-
-  function set(pct){
-    pct = Math.max(0, Math.min(100, pct));
-    zone.style.setProperty("--wipe", pct + "%");
-    blade.setAttribute("aria-valuenow", Math.round(pct));
-  }
-  function fromEvent(e){
-    const r = zone.getBoundingClientRect();
-    set(((e.clientX - r.left) / r.width) * 100);
-  }
-
-  blade.addEventListener("pointerdown", e=>{ dragging=true; blade.setPointerCapture(e.pointerId); e.preventDefault(); });
-  addEventListener("pointermove", e=>{ if(dragging) fromEvent(e); });
-  addEventListener("pointerup",   ()=>{ dragging=false; });
-  zone.addEventListener("pointerdown", e=>{ if(e.target!==blade) fromEvent(e); });
-
-  blade.addEventListener("keydown", e=>{
-    const cur = parseFloat(getComputedStyle(zone).getPropertyValue("--wipe")) || 0;
-    if(e.key==="ArrowRight"){ set(cur+5); e.preventDefault(); }
-    if(e.key==="ArrowLeft"){  set(cur-5); e.preventDefault(); }
-    if(e.key==="Home"){ set(0); e.preventDefault(); }
-    if(e.key==="End"){  set(100); e.preventDefault(); }
-  });
-
-  // One orchestrated pass on load so the interaction explains itself.
-  if(reduce){ set(58); return; }
-  set(0);
-  let start = null;
-  const dur = 1500, to = 58;
-  function tick(t){
-    if(!start) start = t;
-    const k = Math.min(1, (t-start)/dur);
-    const eased = 1 - Math.pow(1-k, 3);
-    if(!dragging) set(eased*to);
-    if(k<1) requestAnimationFrame(tick);
-  }
-  setTimeout(()=>requestAnimationFrame(tick), 550);
+  const zone = $("#wipeZone");
+  if(zone) zone.style.setProperty("--wipe", "100%");
 })();
 
 /* ============================================================
