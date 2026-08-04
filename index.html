@@ -811,6 +811,20 @@ const A = { service:null, count:12, type:null, sides:null, screens:false, tracks
 let step = 1;
 const TOTAL_STEPS = 6;
 
+function trackFunnelStep(n){
+  if(n < 2 || n > 7) return;
+  const stepMeta = {
+    2: {event:"Lead", name:"funnel_step_2_count"},
+    3: {event:"Lead", name:"funnel_step_3_type"},
+    4: {event:"Lead", name:"funnel_step_4_sides"},
+    5: {event:"Lead", name:"funnel_step_5_extras"},
+    6: {event:"Lead", name:"funnel_step_6_estimate"},
+    7: {event:"Purchase", name:"funnel_step_7_booking"}
+  };
+  const meta = stepMeta[n];
+  if(meta){ track(meta.event, {content_name:meta.name, funnel_step:n}); }
+}
+
 function show(n){
   step = n;
   $$(".fn-step").forEach(s => s.classList.toggle("is-active", +s.dataset.step === n));
@@ -821,6 +835,7 @@ function show(n){
     if(scrollY > top) scrollTo({top, behavior:"smooth"});
   }
   track("FunnelStep", {step:n});
+  trackFunnelStep(n);
 }
 
 // path: gutters-only skips straight to contact
@@ -840,7 +855,11 @@ $$("[data-set]").forEach(btn=>{
     const key = btn.dataset.set;
     A[key] = btn.dataset.val;
     $$(`[data-set="${key}"]`).forEach(b=>b.classList.toggle("is-on", b===btn));
-    if(step===1) track("InitiateCheckout", {service:A.service});
+    if(step===1){
+      track("InitiateCheckout", {service:A.service, content_name:"service_selected"});
+    } else if(step===3){
+      track("Lead", {content_name:"window_type_selected", funnel_step:3});
+    }
     setTimeout(()=>{ if(step===6) return; goNext(); }, 190);
   });
 });
@@ -851,12 +870,22 @@ $$("[data-toggle]").forEach(btn=>{
     const k = btn.dataset.toggle;
     A[k] = !A[k];
     btn.classList.toggle("is-on", A[k]);
+    if(step===5){
+      track("Lead", {content_name:`${k}_toggled`, funnel_step:5});
+    }
   });
 });
 
 // stepper
 const countEl = $("#count");
-function setCount(v){ A.count = Math.max(1, Math.min(200, v)); countEl.textContent = A.count; $$(".chip[data-count]").forEach(c=>c.classList.toggle("is-on", +c.dataset.count===A.count)); }
+function setCount(v){
+  A.count = Math.max(1, Math.min(200, v));
+  countEl.textContent = A.count;
+  $$(".chip[data-count]").forEach(c=>c.classList.toggle("is-on", +c.dataset.count===A.count));
+  if(step===2){
+    track("Lead", {content_name:"window_count_selected", funnel_step:2, value:A.count});
+  }
+}
 $("#plus").addEventListener("click", ()=>setCount(A.count+1));
 $("#minus").addEventListener("click", ()=>setCount(A.count-1));
 $$(".chip[data-count]").forEach(c=>c.addEventListener("click", ()=>setCount(+c.dataset.count)));
@@ -866,6 +895,9 @@ setCount(12);
 $$("[data-slot]").forEach(c=>c.addEventListener("click", ()=>{
   A.slot = c.dataset.slot;
   $$("[data-slot]").forEach(x=>x.classList.toggle("is-on", x===c));
+  if(step===6){
+    track("Lead", {content_name:"time_slot_selected", funnel_step:6});
+  }
 }));
 
 // nav
@@ -957,6 +989,7 @@ $("#submitBtn").addEventListener("click", async ()=>{
   }
 
   track("Purchase", {content_name:"booking_request", value:est?est.low:0, currency:"USD"});
+  track("Lead", {content_name:"booking_submit", funnel_step:7});
   btn.textContent = "Book my morning"; btn.disabled = false;
   show(7);
   $("#fnBar").style.width = "100%";
