@@ -388,12 +388,12 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 
   <header class="topbar">
     <div class="wrap">
-      <a class="brand" href="#/" aria-label="Window Wizard home">
+      <a class="brand" href="/" aria-label="Window Wizard home">
         <span data-logo></span>
         <span><b>Window Wizard</b><span>Austin, Texas</span></span>
       </a>
       <a class="tel-link" href="tel:+15125550147" data-phone-link>(512) 555-0147</a>
-      <a class="btn btn-gold" href="#/quote">Get my price</a>
+      <a class="btn btn-gold" href="/quote">Get my price</a>
     </div>
   </header>
 
@@ -409,7 +409,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         <h1>Glass so clean you'll <em>reach out and touch it</em> to be sure.</h1>
         <p class="hero-sub">Window cleaning for Austin homes. Screens, tracks and sills included — not billed as extras after the fact.</p>
         <div class="hero-cta">
-          <a class="btn btn-gold" href="#/quote">Get my price — about 60 seconds</a>
+          <a class="btn btn-gold" href="/quote">Get my price — about 60 seconds</a>
           <a class="btn btn-ghost" href="tel:+15125550147" data-phone-link>Or call (512) 555-0147</a>
         </div>
       </div>
@@ -526,7 +526,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
     <div class="wrap">
       <h2>See what you've been missing.</h2>
       <p>Answer six quick questions and your price appears on the screen. No callback, no sales visit.</p>
-      <a class="btn btn-gold" href="#/quote">Get my price</a>
+      <a class="btn btn-gold" href="/quote">Get my price</a>
     </div>
   </section>
 
@@ -541,7 +541,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 
   <div class="dock">
     <a class="btn btn-ghost" href="tel:+15125550147" data-phone-link>Call</a>
-    <a class="btn btn-gold" href="#/quote">Get my price</a>
+    <a class="btn btn-gold" href="/quote">Get my price</a>
   </div>
 </div>
 
@@ -778,14 +778,21 @@ function track(evt, data={}){
 }
 
 /* ============================================================
-   ROUTER — #/ = home, #/quote = ad landing page
-   Point your Meta ad at:  https://yourdomain.com/#/quote
+   ROUTER — / = home, /quote = ad landing page
+   Point your Meta ad at:  https://yourdomain.com/quote
    ============================================================ */
 function route(){
-  const h = location.hash.replace(/^#\/?/,"").toLowerCase();
+  const path = (location.pathname || "/").replace(/^\/+|\/+$/g, "").toLowerCase();
+  const hash = (location.hash || "").replace(/^#\/?/, "").toLowerCase();
   const p = new URLSearchParams(location.search).get("p");
-  const isQuote = h.startsWith("quote") || h.startsWith("lp") || p==="quote";
+  const isQuote = path === "quote" || path === "lp" || hash.startsWith("quote") || hash.startsWith("lp") || p === "quote";
   const name = isQuote ? "quote" : "home";
+
+  if((hash.startsWith("quote") || hash.startsWith("lp")) && location.pathname !== "/quote"){
+    history.replaceState({}, "", "/quote");
+    return route();
+  }
+
   $$("[data-route]").forEach(el=>el.classList.toggle("is-active", el.dataset.route===name));
   document.title = isQuote
     ? "Get your window cleaning price — Window Wizard, Austin"
@@ -794,6 +801,7 @@ function route(){
   track(isQuote ? "ViewContent" : "PageView", {content_name:name});
 }
 addEventListener("hashchange", route);
+addEventListener("popstate", route);
 route();
 
 /* ============================================================
