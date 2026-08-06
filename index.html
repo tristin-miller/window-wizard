@@ -814,12 +814,12 @@ const TOTAL_STEPS = 6;
 function trackFunnelStep(n){
   if(n < 2 || n > 7) return;
   const stepMeta = {
-    2: {event:"Lead", name:"funnel_step_2_count"},
-    3: {event:"Lead", name:"funnel_step_3_type"},
-    4: {event:"Lead", name:"funnel_step_4_sides"},
-    5: {event:"Lead", name:"funnel_step_5_extras"},
-    6: {event:"Lead", name:"funnel_step_6_estimate"},
-    7: {event:"Purchase", name:"funnel_step_7_booking"}
+    2: {event:"AddToCart", name:"funnel_step_2_count"},
+    3: {event:"CustomizeProduct", name:"funnel_step_3_type"},
+    4: {event:"AddToWishlist", name:"funnel_step_4_sides"},
+    5: {event:"AddToCart", name:"funnel_step_5_extras"},
+    6: {event:"ViewContent", name:"funnel_step_6_estimate"},
+    7: {event:"Lead", name:"funnel_step_7_booking"}
   };
   const meta = stepMeta[n];
   if(meta){ track(meta.event, {content_name:meta.name, funnel_step:n}); }
@@ -834,7 +834,6 @@ function show(n){
     const top = box.getBoundingClientRect().top + scrollY - 12;
     if(scrollY > top) scrollTo({top, behavior:"smooth"});
   }
-  track("FunnelStep", {step:n});
   trackFunnelStep(n);
 }
 
@@ -858,7 +857,7 @@ $$("[data-set]").forEach(btn=>{
     if(step===1){
       track("InitiateCheckout", {service:A.service, content_name:"service_selected"});
     } else if(step===3){
-      track("Lead", {content_name:"window_type_selected", funnel_step:3});
+      track("CustomizeProduct", {content_name:"window_type_selected", funnel_step:3});
     }
     setTimeout(()=>{ if(step===6) return; goNext(); }, 190);
   });
@@ -871,7 +870,7 @@ $$("[data-toggle]").forEach(btn=>{
     A[k] = !A[k];
     btn.classList.toggle("is-on", A[k]);
     if(step===5){
-      track("Lead", {content_name:`${k}_toggled`, funnel_step:5});
+      track("AddToCart", {content_name:`${k}_toggled`, funnel_step:5});
     }
   });
 });
@@ -883,7 +882,7 @@ function setCount(v){
   countEl.textContent = A.count;
   $$(".chip[data-count]").forEach(c=>c.classList.toggle("is-on", +c.dataset.count===A.count));
   if(step===2){
-    track("Lead", {content_name:"window_count_selected", funnel_step:2, value:A.count});
+    track("AddToCart", {content_name:"window_count_selected", funnel_step:2, value:A.count});
   }
 }
 $("#plus").addEventListener("click", ()=>setCount(A.count+1));
@@ -896,7 +895,7 @@ $$("[data-slot]").forEach(c=>c.addEventListener("click", ()=>{
   A.slot = c.dataset.slot;
   $$("[data-slot]").forEach(x=>x.classList.toggle("is-on", x===c));
   if(step===6){
-    track("Lead", {content_name:"time_slot_selected", funnel_step:6});
+    track("InitiateCheckout", {content_name:"time_slot_selected", funnel_step:6});
   }
 }));
 
@@ -944,7 +943,7 @@ function buildEstimate(){
   amt.innerHTML = `${money(r.low)}–${money(r.high)}<small>Final price confirmed before we start</small>`;
   bill.innerHTML = r.lines.map(([k,v]) =>
     `<div><span>${k}</span><span>${v===null ? "quoted on site" : money(v)}</span></div>`).join("");
-  track("Lead", {content_name:"estimate_shown", value:r.low, currency:"USD"});
+  track("ViewContent", {content_name:"estimate_shown", value:r.low, currency:"USD", funnel_step:6});
 }
 
 /* --- submit --- */
