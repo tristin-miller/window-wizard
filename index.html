@@ -7,6 +7,27 @@
 <meta name="description" content="Streak-free window cleaning for Austin homes. Screens, tracks and sills included. Get a price in about 60 seconds.">
 <meta name="theme-color" content="#0B1B2B">
 
+<!-- Meta Pixel Code (must load before the funnel/tracking script below,
+     so fbq() exists in time for the very first PageView/ViewContent —
+     ad clicks land directly on /quote and that first event was being
+     dropped when this block lived at the bottom of the page) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1739558853912067');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1739558853912067&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -716,7 +737,8 @@ const BIZ = {
   phone:        "(512) 555-0147",     // display
   phoneRaw:     "+15125550147",       // tel: link
   email:        "hello@windowwizardatx.com",
-  formEndpoint: ""                     // ← Formspree/Zapier URL. Empty = logs to console only.
+  // Formspree endpoint — emails the inbox tied to this form on every quote request.
+  formEndpoint: "https://formspree.io/f/xeajprvj"
 };
 
 // Logo: paste your base64 data URI (data:image/png;base64,...) or a file path.
@@ -819,8 +841,11 @@ const A = { service:null, count:12, type:null, sides:null, screens:false, tracks
 let step = 1;
 const TOTAL_STEPS = 6;
 
+const trackedSteps = new Set();
 function trackFunnelStep(n){
   if(n < 2 || n > 7) return;
+  if(trackedSteps.has(n)) return; // don't re-fire when the user goes back/forward
+  trackedSteps.add(n);
   const stepMeta = {
     2: {event:"AddToCart", name:"funnel_step_2_count"},
     3: {event:"CustomizeProduct", name:"funnel_step_3_type"},
@@ -981,7 +1006,8 @@ $("#submitBtn").addEventListener("click", async ()=>{
     service:A.service, windows:A.count, windowType:A.type, sides:A.sides,
     screens:A.screens, tracks:A.tracks,
     estimate: est ? `${money(est.low)}–${money(est.high)}` : "gutters — custom",
-    source:"meta-ads-landing", submittedAt:new Date().toISOString()
+    source:"meta-ads-landing", submittedAt:new Date().toISOString(),
+    _subject: `New quote request — ${$("#f-name").value.trim() || "no name"}` // Formspree email subject
   };
 
   const btn = $("#submitBtn");
@@ -989,38 +1015,23 @@ $("#submitBtn").addEventListener("click", async ()=>{
 
   if(BIZ.formEndpoint){
     try{
-      await fetch(BIZ.formEndpoint, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)});
+      const res = await fetch(BIZ.formEndpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/json", "Accept":"application/json"},
+        body:JSON.stringify(payload)
+      });
+      if(!res.ok) console.error("Lead send failed", res.status, await res.text());
     }catch(err){ console.error("Lead send failed", err); }
   }else{
-    console.log("[LEAD — no endpoint set]", payload);
+    console.log("[LEAD — no endpoint set, no email will be sent]", payload);
   }
 
   track("Purchase", {content_name:"booking_request", value:est?est.low:0, currency:"USD"});
-  track("Lead", {content_name:"booking_submit", funnel_step:7});
   btn.textContent = "Book my morning"; btn.disabled = false;
-  show(7);
+  show(7); // fires the Lead event once via trackFunnelStep(7)
   $("#fnBar").style.width = "100%";
 });
 </script>
-
-!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1739558853912067');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1739558853912067&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 
 </body>
 </html>
