@@ -519,7 +519,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <p class="eyebrow">How it goes</p>
       <h2>Three steps, and none of them are yours.</h2>
       <ol class="steps">
-        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>Six taps on your phone. You'll see your price on the last screen — no waiting for a callback to find out.</p></div></li>
+        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>Five taps on your phone. You'll see your price on the last screen — no waiting for a callback to find out.</p></div></li>
         <li><span class="n">2</span><div><h3>Pick a morning</h3><p>We work 6am to 2pm. Choose your day, and we'll text you the arrival window the night before.</p></div></li>
         <li><span class="n">3</span><div><h3>Walk it with us</h3><p>When we're done, we walk the house with you. Anything you're not happy with gets redone on the spot.</p></div></li>
       </ol>
@@ -557,7 +557,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   <section class="close-cta">
     <div class="wrap">
       <h2>See what you've been missing.</h2>
-      <p>Answer six quick questions and your price appears on the screen. No callback, no sales visit.</p>
+      <p>Answer five quick questions and your price appears on the screen. No callback, no sales visit.</p>
       <a class="btn btn-gold" href="/quote">Get my price</a>
     </div>
   </section>
@@ -616,7 +616,6 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
               <button class="chip" data-count="35">35+</button>
             </div>
             <button class="btn btn-gold btn-block" data-next>Next</button>
-            <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
           <!-- S2 type -->
@@ -991,7 +990,10 @@ function buildEstimate(){
 
 /* --- submit --- */
 const dateEl = $("#f-date");
-dateEl.min = new Date().toISOString().split("T")[0];
+// Local date, not UTC: toISOString() alone rolls over to "tomorrow" while
+// it's still evening in Austin (UTC-5/-6), wrongly blocking today's date.
+const today = new Date();
+dateEl.min = new Date(today.getTime() - today.getTimezoneOffset()*60000).toISOString().split("T")[0];
 
 $("#submitBtn").addEventListener("click", async ()=>{
   const fields = [
