@@ -28,6 +28,17 @@ src="https://www.facebook.com/tr?id=1739558853912067&ev=PageView&noscript=1"
 /></noscript>
 <!-- End Meta Pixel Code -->
 
+<!-- PostHog Code -->
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="fo po init Fo Oo qo Zs Lo Bo Ro capture Do vo Go calculateEventProperties Vo register register_once register_for_session unregister unregister_for_session Ko Ao Zo getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Yo identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset Xo shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Qo Uo createPersonProfile setInternalOrTestUser Jo Eo il opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Ho debug Js mn getPageViewId captureTraceFeedback captureTraceMetric Co".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_ruaUjZtYoLshKA9tQ9LE8wLhJagwLpDSKs7ycLwbLfAU', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+    })
+</script>
+<!-- End PostHog Code -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -781,11 +792,18 @@ $$("[data-photo]").forEach(img=>{
   else{ img.style.background="linear-gradient(135deg,#1d4269,#0B1B2B)"; img.removeAttribute("src"); }
 });
 
-/* --- tracking helper: safe no-op if pixels aren't installed yet --- */
+/* --- tracking helpers: safe no-ops if pixels aren't installed yet --- */
 function track(evt, data={}){
   if(typeof fbq==="function") fbq("track", evt, data);
   if(typeof gtag==="function") gtag("event", evt, data);
   console.log("[track]", evt, data);
+}
+// PostHog product-analytics events — separate from the fbq/gtag ad-pixel
+// events above because PostHog funnels want behavior-shaped event names,
+// not ad-platform event names like "AddToCart".
+function ph(evt, props={}){
+  if(typeof posthog!=="undefined" && posthog.capture) posthog.capture(evt, props);
+  console.log("[posthog]", evt, props);
 }
 
 /* ============================================================
@@ -810,6 +828,11 @@ function route(){
     : "Window Wizard — Window Cleaning in Austin, TX";
   window.scrollTo(0,0);
   track(isQuote ? "ViewContent" : "PageView", {content_name:name});
+  // Custom event, not $pageview: this is a single-page app that swaps
+  // views via hash/history changes rather than a real navigation, and
+  // PostHog's automatic $pageview (from `defaults`) already covers the
+  // very first load — a second manual $pageview here would double-count it.
+  ph("page_viewed", {page:name});
 }
 addEventListener("hashchange", route);
 addEventListener("popstate", route);
@@ -836,15 +859,21 @@ function trackFunnelStep(n){
   if(trackedSteps.has(n)) return; // don't re-fire when the user goes back/forward
   trackedSteps.add(n);
   const stepMeta = {
-    1: {event:"AddToCart", name:"funnel_step_1_count"},
-    2: {event:"CustomizeProduct", name:"funnel_step_2_type"},
-    3: {event:"AddToWishlist", name:"funnel_step_3_sides"},
-    4: {event:"AddToCart", name:"funnel_step_4_extras"},
-    5: {event:"ViewContent", name:"funnel_step_5_estimate"},
-    6: {event:"Lead", name:"funnel_step_6_booking"}
+    1: {event:"AddToCart", name:"funnel_step_1_count", posthog:"window_count"},
+    2: {event:"CustomizeProduct", name:"funnel_step_2_type", posthog:"window_type"},
+    3: {event:"AddToWishlist", name:"funnel_step_3_sides", posthog:"cleaning_sides"},
+    4: {event:"AddToCart", name:"funnel_step_4_extras", posthog:"extras"},
+    5: {event:"ViewContent", name:"funnel_step_5_estimate", posthog:"estimate_contact"},
+    6: {event:"Lead", name:"funnel_step_6_booking", posthog:"booking_confirmed"}
   };
   const meta = stepMeta[n];
-  if(meta){ track(meta.event, {content_name:meta.name, funnel_step:n}); }
+  if(meta){
+    track(meta.event, {content_name:meta.name, funnel_step:n});
+    // Single event name + a `step` property is the PostHog-recommended
+    // shape for a funnel — build the funnel insight by filtering this one
+    // event at each step, rather than defining six separate event names.
+    ph("quote_funnel_step_viewed", {step:n, step_name:meta.posthog});
+  }
 }
 
 function show(n){
@@ -870,6 +899,9 @@ $$("[data-set]").forEach(btn=>{
     $$(`[data-set="${key}"]`).forEach(b=>b.classList.toggle("is-on", b===btn));
     if(step===2){
       track("CustomizeProduct", {content_name:"window_type_selected", funnel_step:2});
+      ph("quote_window_type_selected", {window_type:A.type});
+    } else if(step===3){
+      ph("quote_cleaning_sides_selected", {sides:A.sides});
     }
     setTimeout(()=>{ if(step===5) return; goNext(); }, 190);
   });
@@ -883,6 +915,7 @@ $$("[data-toggle]").forEach(btn=>{
     btn.classList.toggle("is-on", A[k]);
     if(step===4){
       track("AddToCart", {content_name:`${k}_toggled`, funnel_step:4});
+      ph("quote_extra_toggled", {extra:k, enabled:A[k]});
     }
   });
 });
@@ -895,6 +928,7 @@ function setCount(v){
   $$(".chip[data-count]").forEach(c=>c.classList.toggle("is-on", +c.dataset.count===A.count));
   if(step===1){
     track("AddToCart", {content_name:"window_count_selected", funnel_step:1, value:A.count});
+    ph("quote_window_count_changed", {count:A.count});
   }
 }
 $("#plus").addEventListener("click", ()=>setCount(A.count+1));
@@ -908,6 +942,7 @@ $$("[data-slot]").forEach(c=>c.addEventListener("click", ()=>{
   $$("[data-slot]").forEach(x=>x.classList.toggle("is-on", x===c));
   if(step===5){
     track("InitiateCheckout", {content_name:"time_slot_selected", funnel_step:5});
+    ph("quote_time_slot_selected", {slot:A.slot});
   }
 }));
 
@@ -948,6 +983,10 @@ function buildEstimate(){
   bill.innerHTML = r.lines.map(([k,v]) =>
     `<div><span>${k}</span><span>${v===null ? "quoted on site" : money(v)}</span></div>`).join("");
   track("ViewContent", {content_name:"estimate_shown", value:r.low, currency:"USD", funnel_step:5});
+  ph("quote_estimate_viewed", {
+    low:r.low, high:r.high, windows:A.count, window_type:A.type, sides:A.sides,
+    screens:A.screens, tracks:A.tracks, gutters:A.gutters
+  });
 }
 
 /* --- submit --- */
@@ -998,6 +1037,15 @@ $("#submitBtn").addEventListener("click", async ()=>{
   }
 
   track("Purchase", {content_name:"booking_request", value:est.low, currency:"USD"});
+  // Main conversion event — the last step of the PostHog funnel. Identifying
+  // by phone links this person's whole prior anonymous session (all the
+  // quote_* events above) to a named lead, so you can look up their journey.
+  if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {name:payload.name, phone:payload.phone, zip:payload.zip});
+  ph("quote_booking_submitted", {
+    windows:payload.windows, window_type:payload.windowType, sides:payload.sides,
+    screens:payload.screens, tracks:payload.tracks, gutters:payload.gutters,
+    time_slot:payload.timeSlot, zip:payload.zip, estimate:payload.estimate
+  });
   btn.textContent = "Book my morning"; btn.disabled = false;
   show(6); // fires the Lead event once via trackFunnelStep(6)
   $("#fnBar").style.width = "100%";
