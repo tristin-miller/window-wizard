@@ -7,6 +7,38 @@
 <meta name="description" content="Streak-free window cleaning for Austin homes. Screens, tracks and sills included. Get a price in about 60 seconds.">
 <meta name="theme-color" content="#0B1B2B">
 
+<!-- Meta Pixel Code (must load before the funnel/tracking script below,
+     so fbq() exists in time for the very first PageView/ViewContent —
+     ad clicks land directly on /quote and that first event was being
+     dropped when this block lived at the bottom of the page) -->
+<script>
+!function(f,b,e,v,n,t,s)
+{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];
+s.parentNode.insertBefore(t,s)}(window, document,'script',
+'https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1739558853912067');
+fbq('track', 'PageView');
+</script>
+<noscript><img height="1" width="1" style="display:none"
+src="https://www.facebook.com/tr?id=1739558853912067&ev=PageView&noscript=1"
+/></noscript>
+<!-- End Meta Pixel Code -->
+
+<!-- PostHog Code -->
+<script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog && window.posthog.__loaded)||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p||((p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",p.onerror=function(){p=null},(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r));var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+".people (stub)"},o="fo po init Fo Oo qo Zs Lo Bo Ro capture Do vo Go calculateEventProperties Vo register register_once register_for_session unregister unregister_for_session Ko Ao Zo getFeatureFlag getFeatureFlagPayload getFeatureFlagResult getAllFeatureFlags isFeatureEnabled reloadFeatureFlags updateFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSurveysLoaded onSessionId getSurveys getActiveMatchingSurveys renderSurvey displaySurvey cancelPendingSurvey canRenderSurvey canRenderSurveyAsync Yo identify setPersonProperties unsetPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset Xo shutdown setIdentity clearIdentity get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException addExceptionStep captureLog startExceptionAutocapture stopExceptionAutocapture loadToolbar get_property getSessionProperty Qo Uo createPersonProfile setInternalOrTestUser Jo Eo il opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing get_explicit_consent_status is_capturing clear_opt_in_out_capturing Ho debug Js mn getPageViewId captureTraceFeedback captureTraceMetric Co".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    posthog.init('phc_ruaUjZtYoLshKA9tQ9LE8wLhJagwLpDSKs7ycLwbLfAU', {
+        api_host: 'https://us.i.posthog.com',
+        defaults: '2026-05-30',
+        person_profiles: 'identified_only', // or 'always' to create profiles for anonymous users as well
+    })
+</script>
+<!-- End PostHog Code -->
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=Instrument+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -487,7 +519,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <p class="eyebrow">How it goes</p>
       <h2>Three steps, and none of them are yours.</h2>
       <ol class="steps">
-        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>Six taps on your phone. You'll see your price on the last screen — no waiting for a callback to find out.</p></div></li>
+        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>Five taps on your phone. You'll see your price on the last screen — no waiting for a callback to find out.</p></div></li>
         <li><span class="n">2</span><div><h3>Pick a morning</h3><p>We work 6am to 2pm. Choose your day, and we'll text you the arrival window the night before.</p></div></li>
         <li><span class="n">3</span><div><h3>Walk it with us</h3><p>When we're done, we walk the house with you. Anything you're not happy with gets redone on the spot.</p></div></li>
       </ol>
@@ -525,7 +557,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   <section class="close-cta">
     <div class="wrap">
       <h2>See what you've been missing.</h2>
-      <p>Answer six quick questions and your price appears on the screen. No callback, no sales visit.</p>
+      <p>Answer five quick questions and your price appears on the screen. No callback, no sales visit.</p>
       <a class="btn btn-gold" href="/quote">Get my price</a>
     </div>
   </section>
@@ -566,21 +598,9 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         <div class="fn-bar"><i id="fnBar"></i></div>
         <div class="fn-body">
 
-          <!-- S1 service -->
+          <!-- S1 count -->
           <section class="fn-step is-active" data-step="1">
-            <p class="fn-count">Question 1 of 6</p>
-            <h2 class="fn-q">What can we clean for you?</h2>
-            <p class="fn-help">Tap one.</p>
-            <div class="opts">
-              <button class="opt" data-set="service" data-val="windows"><span><strong>Windows</strong><small>Inside, outside, or both</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-              <button class="opt" data-set="service" data-val="both"><span><strong>Windows and gutters</strong><small>Most popular — one visit, one crew</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-              <button class="opt" data-set="service" data-val="gutters"><span><strong>Gutters only</strong><small>We'll quote it after a quick look</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-            </div>
-          </section>
-
-          <!-- S2 count -->
-          <section class="fn-step" data-step="2">
-            <p class="fn-count">Question 2 of 6</p>
+            <p class="fn-count">Question 1 of 5</p>
             <h2 class="fn-q">About how many windows?</h2>
             <p class="fn-help">A rough count is fine. We confirm it on site — and if you're over, the price doesn't move.</p>
             <div class="stepper">
@@ -596,12 +616,11 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
               <button class="chip" data-count="35">35+</button>
             </div>
             <button class="btn btn-gold btn-block" data-next>Next</button>
-            <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S3 type -->
-          <section class="fn-step" data-step="3">
-            <p class="fn-count">Question 3 of 6</p>
+          <!-- S2 type -->
+          <section class="fn-step" data-step="2">
+            <p class="fn-count">Question 2 of 5</p>
             <h2 class="fn-q">Which looks most like your windows?</h2>
             <p class="fn-help">Go by the picture, not the name. Pick the closest match.</p>
             <div class="opts">
@@ -629,9 +648,9 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S4 sides -->
-          <section class="fn-step" data-step="4">
-            <p class="fn-count">Question 4 of 6</p>
+          <!-- S3 sides -->
+          <section class="fn-step" data-step="3">
+            <p class="fn-count">Question 3 of 5</p>
             <h2 class="fn-q">Outside only, or inside too?</h2>
             <p class="fn-help">Inside means we come in the house, so it takes longer.</p>
             <div class="opts">
@@ -641,21 +660,22 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S5 extras -->
-          <section class="fn-step" data-step="5">
-            <p class="fn-count">Question 5 of 6</p>
+          <!-- S4 extras -->
+          <section class="fn-step" data-step="4">
+            <p class="fn-count">Question 4 of 5</p>
             <h2 class="fn-q">Anything to add?</h2>
             <p class="fn-help">Tap any that apply, or skip.</p>
             <div class="opts">
               <button class="opt" data-toggle="screens"><span><strong>Clean the screens</strong><small>Pulled, washed, dried, put back</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
               <button class="opt" data-toggle="tracks"><span><strong>Detail the tracks &amp; sills</strong><small>Vacuumed and hand-wiped</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+              <button class="opt" data-toggle="gutters"><span><strong>Clean the gutters</strong><small>We'll quote it after a quick look</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
             </div>
             <button class="btn btn-gold btn-block" style="margin-top:1.1rem" data-next>See my price</button>
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S6 estimate + contact -->
-          <section class="fn-step" data-step="6">
+          <!-- S5 estimate + contact -->
+          <section class="fn-step" data-step="5">
             <div class="reveal" id="revealBox">
               <p class="eyebrow">Your estimate</p>
               <div class="amount" id="amount">$—<small>Final price confirmed before we start</small></div>
@@ -685,8 +705,8 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S7 done -->
-          <section class="fn-step" data-step="7">
+          <!-- S6 done -->
+          <section class="fn-step" data-step="6">
             <div class="done">
               <div class="seal"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
               <h2>Got it — you're on the list.</h2>
@@ -716,7 +736,8 @@ const BIZ = {
   phone:        "(512) 555-0147",     // display
   phoneRaw:     "+15125550147",       // tel: link
   email:        "hello@windowwizardatx.com",
-  formEndpoint: ""                     // ← Formspree/Zapier URL. Empty = logs to console only.
+  // Formspree endpoint — emails the inbox tied to this form on every quote request.
+  formEndpoint: "https://formspree.io/f/xeajprvj"
 };
 
 // Logo: paste your base64 data URI (data:image/png;base64,...) or a file path.
@@ -737,7 +758,7 @@ const PHOTOS = {
 // CONFIRM these against your real numbers before running traffic.
 const PRICING = {
   perWindow: { single:6, hung:12, grid:9, french:20, unsure:10 },
-  bothSides: 1.8,    // multiplier when they want inside + outside  ← CONFIRM
+  interior:  125,    // flat rate for inside cleaning, regardless of window count
   screens:   4,      // per window (you said $3–$5 by screen type)  ← CONFIRM
   tracks:    5,      // per window
   minimum:   100     // job minimum
@@ -770,11 +791,18 @@ $$("[data-photo]").forEach(img=>{
   else{ img.style.background="linear-gradient(135deg,#1d4269,#0B1B2B)"; img.removeAttribute("src"); }
 });
 
-/* --- tracking helper: safe no-op if pixels aren't installed yet --- */
+/* --- tracking helpers: safe no-ops if pixels aren't installed yet --- */
 function track(evt, data={}){
   if(typeof fbq==="function") fbq("track", evt, data);
   if(typeof gtag==="function") gtag("event", evt, data);
   console.log("[track]", evt, data);
+}
+// PostHog product-analytics events — separate from the fbq/gtag ad-pixel
+// events above because PostHog funnels want behavior-shaped event names,
+// not ad-platform event names like "AddToCart".
+function ph(evt, props={}){
+  if(typeof posthog!=="undefined" && posthog.capture) posthog.capture(evt, props);
+  console.log("[posthog]", evt, props);
 }
 
 /* ============================================================
@@ -799,6 +827,11 @@ function route(){
     : "Window Wizard — Window Cleaning in Austin, TX";
   window.scrollTo(0,0);
   track(isQuote ? "ViewContent" : "PageView", {content_name:name});
+  // Custom event, not $pageview: this is a single-page app that swaps
+  // views via hash/history changes rather than a real navigation, and
+  // PostHog's automatic $pageview (from `defaults`) already covers the
+  // very first load — a second manual $pageview here would double-count it.
+  ph("page_viewed", {page:name});
 }
 addEventListener("hashchange", route);
 addEventListener("popstate", route);
@@ -815,22 +848,31 @@ route();
 /* ============================================================
    FUNNEL
    ============================================================ */
-const A = { service:null, count:12, type:null, sides:null, screens:false, tracks:false, slot:null };
+const A = { count:12, type:null, sides:null, screens:false, tracks:false, gutters:false, slot:null };
 let step = 1;
-const TOTAL_STEPS = 6;
+const TOTAL_STEPS = 5;
 
+const trackedSteps = new Set();
 function trackFunnelStep(n){
-  if(n < 2 || n > 7) return;
+  if(n < 1 || n > 6) return;
+  if(trackedSteps.has(n)) return; // don't re-fire when the user goes back/forward
+  trackedSteps.add(n);
   const stepMeta = {
-    2: {event:"AddToCart", name:"funnel_step_2_count"},
-    3: {event:"CustomizeProduct", name:"funnel_step_3_type"},
-    4: {event:"AddToWishlist", name:"funnel_step_4_sides"},
-    5: {event:"AddToCart", name:"funnel_step_5_extras"},
-    6: {event:"ViewContent", name:"funnel_step_6_estimate"},
-    7: {event:"Lead", name:"funnel_step_7_booking"}
+    1: {event:"AddToCart", name:"funnel_step_1_count", posthog:"window_count"},
+    2: {event:"CustomizeProduct", name:"funnel_step_2_type", posthog:"window_type"},
+    3: {event:"AddToWishlist", name:"funnel_step_3_sides", posthog:"cleaning_sides"},
+    4: {event:"AddToCart", name:"funnel_step_4_extras", posthog:"extras"},
+    5: {event:"ViewContent", name:"funnel_step_5_estimate", posthog:"estimate_contact"},
+    6: {event:"Lead", name:"funnel_step_6_booking", posthog:"booking_confirmed"}
   };
   const meta = stepMeta[n];
-  if(meta){ track(meta.event, {content_name:meta.name, funnel_step:n}); }
+  if(meta){
+    track(meta.event, {content_name:meta.name, funnel_step:n});
+    // Single event name + a `step` property is the PostHog-recommended
+    // shape for a funnel — build the funnel insight by filtering this one
+    // event at each step, rather than defining six separate event names.
+    ph("quote_funnel_step_viewed", {step:n, step_name:meta.posthog});
+  }
 }
 
 function show(n){
@@ -845,16 +887,8 @@ function show(n){
   trackFunnelStep(n);
 }
 
-// path: gutters-only skips straight to contact
-function nextFrom(n){
-  if(n===1) return A.service==="gutters" ? 6 : 2;
-  if(n===5) return 6;
-  return n+1;
-}
-function prevFrom(n){
-  if(n===6) return A.service==="gutters" ? 1 : 5;
-  return n-1;
-}
+function nextFrom(n){ return n+1; }
+function prevFrom(n){ return n-1; }
 
 // single-choice cards
 $$("[data-set]").forEach(btn=>{
@@ -862,12 +896,13 @@ $$("[data-set]").forEach(btn=>{
     const key = btn.dataset.set;
     A[key] = btn.dataset.val;
     $$(`[data-set="${key}"]`).forEach(b=>b.classList.toggle("is-on", b===btn));
-    if(step===1){
-      track("InitiateCheckout", {service:A.service, content_name:"service_selected"});
+    if(step===2){
+      track("CustomizeProduct", {content_name:"window_type_selected", funnel_step:2});
+      ph("quote_window_type_selected", {window_type:A.type});
     } else if(step===3){
-      track("CustomizeProduct", {content_name:"window_type_selected", funnel_step:3});
+      ph("quote_cleaning_sides_selected", {sides:A.sides});
     }
-    setTimeout(()=>{ if(step===6) return; goNext(); }, 190);
+    setTimeout(()=>{ if(step===5) return; goNext(); }, 190);
   });
 });
 
@@ -877,8 +912,9 @@ $$("[data-toggle]").forEach(btn=>{
     const k = btn.dataset.toggle;
     A[k] = !A[k];
     btn.classList.toggle("is-on", A[k]);
-    if(step===5){
-      track("AddToCart", {content_name:`${k}_toggled`, funnel_step:5});
+    if(step===4){
+      track("AddToCart", {content_name:`${k}_toggled`, funnel_step:4});
+      ph("quote_extra_toggled", {extra:k, enabled:A[k]});
     }
   });
 });
@@ -889,8 +925,9 @@ function setCount(v){
   A.count = Math.max(1, Math.min(200, v));
   countEl.textContent = A.count;
   $$(".chip[data-count]").forEach(c=>c.classList.toggle("is-on", +c.dataset.count===A.count));
-  if(step===2){
-    track("AddToCart", {content_name:"window_count_selected", funnel_step:2, value:A.count});
+  if(step===1){
+    track("AddToCart", {content_name:"window_count_selected", funnel_step:1, value:A.count});
+    ph("quote_window_count_changed", {count:A.count});
   }
 }
 $("#plus").addEventListener("click", ()=>setCount(A.count+1));
@@ -902,28 +939,27 @@ setCount(12);
 $$("[data-slot]").forEach(c=>c.addEventListener("click", ()=>{
   A.slot = c.dataset.slot;
   $$("[data-slot]").forEach(x=>x.classList.toggle("is-on", x===c));
-  if(step===6){
-    track("InitiateCheckout", {content_name:"time_slot_selected", funnel_step:6});
+  if(step===5){
+    track("InitiateCheckout", {content_name:"time_slot_selected", funnel_step:5});
+    ph("quote_time_slot_selected", {slot:A.slot});
   }
 }));
 
 // nav
-function goNext(){ const n = nextFrom(step); if(n===6) buildEstimate(); show(n); }
+function goNext(){ const n = nextFrom(step); if(n===5) buildEstimate(); show(n); }
 $$("[data-next]").forEach(b=>b.addEventListener("click", goNext));
 $$("[data-back]").forEach(b=>b.addEventListener("click", ()=>show(prevFrom(step))));
 
 /* --- the math --- */
 function calc(){
-  if(A.service==="gutters") return null;
   const rate = PRICING.perWindow[A.type || "unsure"];
   const lines = [];
   let base = rate * A.count;
   lines.push([`${A.count} windows · ${labelType(A.type)}`, base]);
 
   if(A.sides==="both"){
-    const add = base * (PRICING.bothSides - 1);
-    lines.push(["Inside and outside", add]);
-    base += add;
+    lines.push(["Inside cleaning (flat rate)", PRICING.interior]);
+    base += PRICING.interior;
   }
   if(A.screens){ const s = PRICING.screens * A.count; lines.push(["Screens cleaned", s]); base += s; }
   if(A.tracks){  const t = PRICING.tracks  * A.count; lines.push(["Tracks & sills detailed", t]); base += t; }
@@ -932,7 +968,7 @@ function calc(){
     lines.push(["Minimum job charge", PRICING.minimum - base]);
     base = PRICING.minimum;
   }
-  if(A.service==="both") lines.push(["Gutters", null]);
+  if(A.gutters) lines.push(["Gutters", null]);
   return {lines, low:Math.round(base/5)*5, high:Math.round((base*1.14)/5)*5};
 }
 function labelType(t){
@@ -942,21 +978,22 @@ function labelType(t){
 function buildEstimate(){
   const r = calc();
   const amt = $("#amount"), bill = $("#bill");
-  if(!r){
-    amt.innerHTML = `Gutters<small>We'll quote after a quick look at your roofline</small>`;
-    bill.innerHTML = "";
-    $("#lastQ").textContent = "Where should we send your quote?";
-    return;
-  }
   amt.innerHTML = `${money(r.low)}–${money(r.high)}<small>Final price confirmed before we start</small>`;
   bill.innerHTML = r.lines.map(([k,v]) =>
     `<div><span>${k}</span><span>${v===null ? "quoted on site" : money(v)}</span></div>`).join("");
-  track("ViewContent", {content_name:"estimate_shown", value:r.low, currency:"USD", funnel_step:6});
+  track("ViewContent", {content_name:"estimate_shown", value:r.low, currency:"USD", funnel_step:5});
+  ph("quote_estimate_viewed", {
+    low:r.low, high:r.high, windows:A.count, window_type:A.type, sides:A.sides,
+    screens:A.screens, tracks:A.tracks, gutters:A.gutters
+  });
 }
 
 /* --- submit --- */
 const dateEl = $("#f-date");
-dateEl.min = new Date().toISOString().split("T")[0];
+// Local date, not UTC: toISOString() alone rolls over to "tomorrow" while
+// it's still evening in Austin (UTC-5/-6), wrongly blocking today's date.
+const today = new Date();
+dateEl.min = new Date(today.getTime() - today.getTimezoneOffset()*60000).toISOString().split("T")[0];
 
 $("#submitBtn").addEventListener("click", async ()=>{
   const fields = [
@@ -978,10 +1015,11 @@ $("#submitBtn").addEventListener("click", async ()=>{
   const payload = {
     name:$("#f-name").value.trim(), phone:$("#f-phone").value.trim(),
     zip:$("#f-zip").value.trim(), date:$("#f-date").value, timeSlot:A.slot||"any morning",
-    service:A.service, windows:A.count, windowType:A.type, sides:A.sides,
-    screens:A.screens, tracks:A.tracks,
-    estimate: est ? `${money(est.low)}–${money(est.high)}` : "gutters — custom",
-    source:"meta-ads-landing", submittedAt:new Date().toISOString()
+    windows:A.count, windowType:A.type, sides:A.sides,
+    screens:A.screens, tracks:A.tracks, gutters:A.gutters,
+    estimate: `${money(est.low)}–${money(est.high)}`,
+    source:"meta-ads-landing", submittedAt:new Date().toISOString(),
+    _subject: `New quote request — ${$("#f-name").value.trim() || "no name"}` // Formspree email subject
   };
 
   const btn = $("#submitBtn");
@@ -989,38 +1027,32 @@ $("#submitBtn").addEventListener("click", async ()=>{
 
   if(BIZ.formEndpoint){
     try{
-      await fetch(BIZ.formEndpoint, {method:"POST", headers:{"Content-Type":"application/json"}, body:JSON.stringify(payload)});
+      const res = await fetch(BIZ.formEndpoint, {
+        method:"POST",
+        headers:{"Content-Type":"application/json", "Accept":"application/json"},
+        body:JSON.stringify(payload)
+      });
+      if(!res.ok) console.error("Lead send failed", res.status, await res.text());
     }catch(err){ console.error("Lead send failed", err); }
   }else{
-    console.log("[LEAD — no endpoint set]", payload);
+    console.log("[LEAD — no endpoint set, no email will be sent]", payload);
   }
 
-  track("Purchase", {content_name:"booking_request", value:est?est.low:0, currency:"USD"});
-  track("Lead", {content_name:"booking_submit", funnel_step:7});
+  track("Purchase", {content_name:"booking_request", value:est.low, currency:"USD"});
+  // Main conversion event — the last step of the PostHog funnel. Identifying
+  // by phone links this person's whole prior anonymous session (all the
+  // quote_* events above) to a named lead, so you can look up their journey.
+  if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {name:payload.name, phone:payload.phone, zip:payload.zip});
+  ph("quote_booking_submitted", {
+    windows:payload.windows, window_type:payload.windowType, sides:payload.sides,
+    screens:payload.screens, tracks:payload.tracks, gutters:payload.gutters,
+    time_slot:payload.timeSlot, zip:payload.zip, estimate:payload.estimate
+  });
   btn.textContent = "Book my morning"; btn.disabled = false;
-  show(7);
+  show(6); // fires the Lead event once via trackFunnelStep(6)
   $("#fnBar").style.width = "100%";
 });
 </script>
-
-!-- Meta Pixel Code -->
-<script>
-!function(f,b,e,v,n,t,s)
-{if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-n.queue=[];t=b.createElement(e);t.async=!0;
-t.src=v;s=b.getElementsByTagName(e)[0];
-s.parentNode.insertBefore(t,s)}(window, document,'script',
-'https://connect.facebook.net/en_US/fbevents.js');
-fbq('init', '1739558853912067');
-fbq('track', 'PageView');
-</script>
-<noscript><img height="1" width="1" style="display:none"
-src="https://www.facebook.com/tr?id=1739558853912067&ev=PageView&noscript=1"
-/></noscript>
-<!-- End Meta Pixel Code -->
-
 
 </body>
 </html>
