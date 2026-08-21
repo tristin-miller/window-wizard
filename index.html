@@ -160,7 +160,10 @@ p{margin:0 0 1em}
 }
 .review-pill:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
 .review-pill svg{flex:none;width:18px;height:18px}
-.review-pill .stars{color:var(--gold);letter-spacing:.02em;font-size:.86em}
+.review-pill .stars{
+  color:var(--gold);letter-spacing:.03em;font-size:1.05em;
+  margin:0;line-height:1;display:inline-flex;align-items:center;
+}
 .review-pill b{font-weight:700}
 .review-pill .muted{color:var(--body);font-weight:500}
 @media (max-width:560px){
@@ -302,7 +305,9 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   padding:.6rem .7rem calc(.6rem + env(safe-area-inset-bottom));
   background:rgba(11,27,43,.94);backdrop-filter:blur(12px);
   border-top:1px solid rgba(255,255,255,.12);
+  transform:translateY(110%);transition:transform .25s cubic-bezier(.2,.7,.3,1);
 }
+.dock.is-visible{transform:translateY(0)}
 .dock .btn{flex:1;min-height:52px;font-size:1rem}
 
 /* ---------- 5. LANDING (ad page) ---------- */
@@ -380,23 +385,6 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .field .err{color:#C0392B;font-size:.88rem;font-weight:600;margin-top:.35rem;display:none}
 .field.has-err input{border-color:#C0392B}
 .field.has-err .err{display:block}
-.slots{display:grid;grid-template-columns:1fr 1fr;gap:.55rem}
-.slots .chip{width:100%;justify-content:center;display:flex;align-items:center}
-
-/* estimate reveal */
-.reveal{text-align:center;padding:.4rem 0 .2rem}
-.reveal .eyebrow{justify-content:center}
-.reveal .amount{
-  font-family:var(--display);font-weight:700;font-size:clamp(3rem,15vw,4.4rem);
-  color:var(--ink);line-height:1;letter-spacing:-.03em;
-  animation:pop .5s cubic-bezier(.2,.9,.3,1.2);
-}
-@keyframes pop{from{opacity:0;transform:scale(.86)}to{opacity:1;transform:none}}
-.reveal .amount small{font-size:.34em;font-weight:600;color:var(--azure);display:block;margin-top:.5rem;font-family:var(--sans);letter-spacing:0}
-.bill{margin:1.3rem 0 1.4rem;border-top:1px solid var(--rule);border-bottom:1px solid var(--rule);padding:.9rem 0}
-.bill div{display:flex;justify-content:space-between;gap:1rem;font-size:.95rem;padding:.22rem 0}
-.bill div span:last-child{font-weight:700;color:var(--ink);font-variant-numeric:tabular-nums}
-
 .fn-nav{display:flex;align-items:center;gap:.8rem;margin-top:1.3rem}
 .fn-back{background:none;border:0;color:#7b8896;font-weight:600;padding:.8rem .2rem;font-size:.95rem}
 .fn-back:hover{color:var(--deep)}
@@ -413,7 +401,6 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   .quotes{grid-template-columns:repeat(3,1fr)}
   .wall{grid-template-columns:repeat(3,1fr);gap:10px}
   .wall figure:first-child{grid-column:span 2;grid-row:span 2;aspect-ratio:auto}
-  .slots{grid-template-columns:repeat(2,1fr)}
 }
 @media (min-width:900px){
   :root{--gut:32px}
@@ -561,8 +548,8 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <p class="eyebrow">How it goes</p>
       <h2>Three steps, and none of them are yours.</h2>
       <ol class="steps">
-        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>Five taps on your phone. You'll see your price on the last screen — no waiting for a callback to find out.</p></div></li>
-        <li><span class="n">2</span><div><h3>Pick a morning</h3><p>We work 6am to 2pm. Choose your day, and we'll text you the arrival window the night before.</p></div></li>
+        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>Five taps on your phone, then leave your number — we'll call you back with your price.</p></div></li>
+        <li><span class="n">2</span><div><h3>Pick a morning</h3><p>We work 6am to 2pm. We'll lock in your day on that call, then text the arrival window the night before.</p></div></li>
         <li><span class="n">3</span><div><h3>Walk it with us</h3><p>When we're done, we walk the house with you. Anything you're not happy with gets redone on the spot.</p></div></li>
       </ol>
     </div>
@@ -613,7 +600,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   <section class="close-cta">
     <div class="wrap">
       <h2>See what you've been missing.</h2>
-      <p>Answer five quick questions and your price appears on the screen. No callback, no sales visit.</p>
+      <p>Answer five quick questions and leave your number — we'll call with your price, no sales visit.</p>
       <a class="btn btn-gold" href="/quote">Get my price</a>
     </div>
   </section>
@@ -646,7 +633,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <div class="lp-head">
         <span class="lp-badge">Booking mornings this week</span>
         <h1>Your Austin windows, cleaned<br><em>this week</em>.</h1>
-        <p>Get a fast, clear price in minutes — no callback, no sales visit.</p>
+        <p>Answer five quick questions and leave your number — we'll call with your price, no sales visit.</p>
       </div>
 
       <!-- ===== FUNNEL ===== -->
@@ -726,38 +713,20 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
               <button class="opt" data-toggle="tracks"><span><strong>Detail the tracks &amp; sills</strong><small>Vacuumed and hand-wiped</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
               <button class="opt" data-toggle="gutters"><span><strong>Clean the gutters</strong><small>We'll quote it after a quick look</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
             </div>
-            <button class="btn btn-gold btn-block" style="margin-top:1.1rem" data-next>See my price</button>
+            <button class="btn btn-gold btn-block" style="margin-top:1.1rem" data-next>Continue</button>
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S5 estimate + contact -->
+          <!-- S5 contact -->
           <section class="fn-step" data-step="5">
-            <div class="reveal" id="revealBox">
-              <p class="eyebrow">Your estimate</p>
-              <div class="amount" id="amount">$—<small>Final price confirmed before we start</small></div>
-            </div>
-            <div class="bill" id="bill"></div>
-
             <p class="fn-count">Last step</p>
-            <h2 class="fn-q" id="lastQ">Where should we send it?</h2>
-            <p class="fn-help">We'll text to confirm your morning. No spam, no drip campaign.</p>
+            <h2 class="fn-q">What's the best number to call?</h2>
+            <p class="fn-help">We'll call within a few hours with your price — no forms, no waiting on hold.</p>
 
-            <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name" enterkeyhint="next"><p class="err">Please add your name.</p></div>
-            <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="next"><p class="err">Please add a phone number we can text.</p></div>
-            <div class="field"><label for="f-zip">Zip code</label><input id="f-zip" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="78704"><p class="err">Please add a 5-digit zip.</p></div>
-            <div class="field"><label for="f-date">Preferred day</label><input id="f-date" type="date"><p class="err">Please pick a day.</p></div>
-            <div class="field">
-              <label>Preferred time</label>
-              <div class="slots">
-                <button class="chip" data-slot="6–8am">6–8am</button>
-                <button class="chip" data-slot="8–10am">8–10am</button>
-                <button class="chip" data-slot="10am–12pm">10am–12pm</button>
-                <button class="chip" data-slot="12–2pm">12–2pm</button>
-              </div>
-            </div>
+            <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="done"><p class="err">Please add a phone number we can call.</p></div>
 
-            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="submitBtn">Book my morning</button>
-            <p class="fn-note">You're not charged anything now. We confirm by text and you can change or cancel any time.</p>
+            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="submitBtn">Call me with my price</button>
+            <p class="fn-note">Nothing's booked and no price is set until we call. No spam, no drip campaign.</p>
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
@@ -765,8 +734,8 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
           <section class="fn-step" data-step="6">
             <div class="done">
               <div class="seal"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-              <h2>Got it — you're on the list.</h2>
-              <p>We'll text you within a few hours to lock in your morning. If it's urgent, just call.</p>
+              <h2>Got it — we'll call you shortly.</h2>
+              <p>We'll ring you within a few hours with your price and find a morning that works. If it's urgent, just call us.</p>
               <a class="btn btn-gold btn-block" href="tel:+16085476456" data-phone-link style="margin-top:1rem">Call (608) 547-6456</a>
             </div>
           </section>
@@ -902,9 +871,23 @@ route();
 })();
 
 /* ============================================================
+   DOCK — mobile sticky CTA bar, shown only once the hero's own
+   buttons have scrolled out of view (no point stacking two CTAs)
+   ============================================================ */
+(function(){
+  const cta = $(".hero-cta");
+  const dock = $(".dock");
+  if(!cta || !dock) return;
+  const io = new IntersectionObserver(([entry])=>{
+    dock.classList.toggle("is-visible", entry.boundingClientRect.top < 0);
+  }, {threshold:0});
+  io.observe(cta);
+})();
+
+/* ============================================================
    FUNNEL
    ============================================================ */
-const A = { count:12, type:null, sides:null, screens:false, tracks:false, gutters:false, slot:null };
+const A = { count:12, type:null, sides:null, screens:false, tracks:false, gutters:false };
 let step = 1;
 const TOTAL_STEPS = 5;
 
@@ -991,16 +974,6 @@ $("#minus").addEventListener("click", ()=>setCount(A.count-1));
 $$(".chip[data-count]").forEach(c=>c.addEventListener("click", ()=>setCount(+c.dataset.count)));
 setCount(12);
 
-// time slots
-$$("[data-slot]").forEach(c=>c.addEventListener("click", ()=>{
-  A.slot = c.dataset.slot;
-  $$("[data-slot]").forEach(x=>x.classList.toggle("is-on", x===c));
-  if(step===5){
-    track("InitiateCheckout", {content_name:"time_slot_selected", funnel_step:5});
-    ph("quote_time_slot_selected", {slot:A.slot});
-  }
-}));
-
 // nav
 function goNext(){ const n = nextFrom(step); if(n===5) buildEstimate(); show(n); }
 $$("[data-next]").forEach(b=>b.addEventListener("click", goNext));
@@ -1032,31 +1005,22 @@ function labelType(t){
 }
 
 function buildEstimate(){
+  // Price isn't shown to the customer anymore — we still compute it here
+  // so the value flows to the ad pixels (for bid optimization) and into
+  // the lead payload for whoever calls them back.
   const r = calc();
-  const amt = $("#amount"), bill = $("#bill");
-  amt.innerHTML = `${money(r.low)}–${money(r.high)}<small>Final price confirmed before we start</small>`;
-  bill.innerHTML = r.lines.map(([k,v]) =>
-    `<div><span>${k}</span><span>${v===null ? "quoted on site" : money(v)}</span></div>`).join("");
   track("ViewContent", {content_name:"estimate_shown", value:r.low, currency:"USD", funnel_step:5});
   ph("quote_estimate_viewed", {
     low:r.low, high:r.high, windows:A.count, window_type:A.type, sides:A.sides,
     screens:A.screens, tracks:A.tracks, gutters:A.gutters
   });
+  return r;
 }
 
 /* --- submit --- */
-const dateEl = $("#f-date");
-// Local date, not UTC: toISOString() alone rolls over to "tomorrow" while
-// it's still evening in Austin (UTC-5/-6), wrongly blocking today's date.
-const today = new Date();
-dateEl.min = new Date(today.getTime() - today.getTimezoneOffset()*60000).toISOString().split("T")[0];
-
 $("#submitBtn").addEventListener("click", async ()=>{
   const fields = [
-    ["#f-name",  v=>v.trim().length>1],
-    ["#f-phone", v=>v.replace(/\D/g,"").length>=10],
-    ["#f-zip",   v=>/^\d{5}$/.test(v.trim())],
-    ["#f-date",  v=>!!v]
+    ["#f-phone", v=>v.replace(/\D/g,"").length>=10]
   ];
   let ok = true, first = null;
   fields.forEach(([sel,test])=>{
@@ -1069,13 +1033,12 @@ $("#submitBtn").addEventListener("click", async ()=>{
 
   const est = calc();
   const payload = {
-    name:$("#f-name").value.trim(), phone:$("#f-phone").value.trim(),
-    zip:$("#f-zip").value.trim(), date:$("#f-date").value, timeSlot:A.slot||"any morning",
+    phone:$("#f-phone").value.trim(),
     windows:A.count, windowType:A.type, sides:A.sides,
     screens:A.screens, tracks:A.tracks, gutters:A.gutters,
     estimate: `${money(est.low)}–${money(est.high)}`,
     source:"meta-ads-landing", submittedAt:new Date().toISOString(),
-    _subject: `New quote request — ${$("#f-name").value.trim() || "no name"}` // Formspree email subject
+    _subject: `New quote request — ${$("#f-phone").value.trim() || "no phone"}` // Formspree email subject
   };
 
   const btn = $("#submitBtn");
@@ -1098,13 +1061,13 @@ $("#submitBtn").addEventListener("click", async ()=>{
   // Main conversion event — the last step of the PostHog funnel. Identifying
   // by phone links this person's whole prior anonymous session (all the
   // quote_* events above) to a named lead, so you can look up their journey.
-  if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {name:payload.name, phone:payload.phone, zip:payload.zip});
+  if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {phone:payload.phone});
   ph("quote_booking_submitted", {
     windows:payload.windows, window_type:payload.windowType, sides:payload.sides,
     screens:payload.screens, tracks:payload.tracks, gutters:payload.gutters,
-    time_slot:payload.timeSlot, zip:payload.zip, estimate:payload.estimate
+    estimate:payload.estimate
   });
-  btn.textContent = "Book my morning"; btn.disabled = false;
+  btn.textContent = "Call me with my price"; btn.disabled = false;
   show(6); // fires the Lead event once via trackFunnelStep(6)
   $("#fnBar").style.width = "100%";
 });
