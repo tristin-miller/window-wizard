@@ -983,12 +983,16 @@ function route(){
     ? "Get your window cleaning price — Window Wizard, Austin"
     : "Window Wizard — Window Cleaning in Austin, TX";
   window.scrollTo(0,0);
-  track(isQuote ? "ViewContent" : "PageView", {content_name:name});
+  // Both routes are marketing/landing content at this point — the funnel
+  // itself (the thing ViewContent should mean) only starts once "Build my
+  // quote" is clicked, see the splash-cta handler below.
+  track("PageView", {content_name:name});
   // Custom event, not $pageview: this is a single-page app that swaps
   // views via hash/history changes rather than a real navigation, and
   // PostHog's automatic $pageview (from `defaults`) already covers the
   // very first load — a second manual $pageview here would double-count it.
   ph("page_viewed", {page:name});
+  if(isQuote) ph("quote_splash_viewed");
 }
 addEventListener("hashchange", route);
 addEventListener("popstate", route);
@@ -1020,6 +1024,9 @@ route();
    SPLASH — funnel first page. Reveals the funnel card on click,
    same reveal for every entry point (no separate step number,
    the real funnel's own step-1 tracking fires once it's shown).
+   CTA click is the ViewContent moment: it's the first time the
+   visitor is actually engaging with the quote-building content,
+   as opposed to just landing on the marketing page around it.
    ============================================================ */
 (function(){
   const cta = $("#splashCta");
@@ -1027,7 +1034,7 @@ route();
   const funnelCard = $("#funnelCard");
   if(!cta || !splash || !funnelCard) return;
   cta.addEventListener("click", ()=>{
-    track("InitiateCheckout", {content_name:"splash_cta_clicked"});
+    track("ViewContent", {content_name:"quote_funnel_started"});
     ph("quote_splash_cta_clicked");
     splash.hidden = true;
     funnelCard.hidden = false;

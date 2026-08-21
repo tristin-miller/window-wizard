@@ -327,6 +327,81 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .lp-foot{text-align:center;padding:1rem 0 0;font-size:.8rem;color:#7b8896}
 .lp-foot a{color:var(--deep);font-weight:600}
 
+/* ---------- 5b. LANDING SPLASH (funnel first page) ---------- */
+.lp-splash{max-width:760px;margin-inline:auto}
+
+.lp-feats{list-style:none;margin:1.3rem 0 1.5rem;padding:0;display:grid;grid-template-columns:1fr;gap:.9rem}
+.lp-feats li{display:flex;align-items:flex-start;gap:.65rem;font-size:.92rem;line-height:1.35;text-align:left}
+.lp-feats svg{flex:none;width:22px;height:22px;color:var(--azure);margin-top:1px}
+.lp-feats b{display:block;color:var(--ink);font-weight:700}
+.lp-feats span{color:var(--body)}
+
+.lp-secure{display:flex;align-items:center;justify-content:center;gap:.4em;margin:.65rem 0 0;font-size:.82rem;color:#7b8896}
+.lp-secure svg{flex:none;width:14px;height:14px}
+
+/* before / after drag slider */
+.baSlider{
+  position:relative;margin-top:1.7rem;border-radius:var(--r);overflow:hidden;
+  box-shadow:var(--shadow-lg);aspect-ratio:4/3;background:var(--ink);
+  touch-action:pan-y;user-select:none;cursor:ew-resize;
+}
+.baSlider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
+.ba-before-wrap{position:absolute;inset:0;clip-path:inset(0 50% 0 0)}
+.ba-before-wrap img{filter:saturate(.42) contrast(.8) brightness(.86) blur(1.1px)}
+.ba-before-wrap::after{
+  content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(circle at 18% 24%,rgba(196,178,140,.5) 0 2px,transparent 3px),
+    radial-gradient(circle at 62% 12%,rgba(196,178,140,.4) 0 3px,transparent 4px),
+    radial-gradient(circle at 84% 61%,rgba(196,178,140,.45) 0 2px,transparent 3px),
+    radial-gradient(circle at 33% 74%,rgba(196,178,140,.4) 0 3px,transparent 4px),
+    radial-gradient(circle at 71% 88%,rgba(196,178,140,.35) 0 2px,transparent 3px),
+    linear-gradient(115deg,rgba(150,134,102,.34),rgba(120,116,100,.2));
+  mix-blend-mode:multiply;
+}
+.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%);box-shadow:0 0 0 1px rgba(11,27,43,.25);pointer-events:none}
+.ba-grip{
+  position:absolute;top:50%;left:50%;width:38px;height:38px;border-radius:50%;background:#fff;
+  transform:translate(-50%,-50%);display:grid;place-items:center;box-shadow:var(--shadow);
+  color:var(--deep);pointer-events:none;
+}
+.ba-tag{
+  position:absolute;bottom:10px;font:700 .68rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;
+  color:#fff;background:rgba(11,27,43,.55);padding:.4em .7em;border-radius:999px;pointer-events:none;
+}
+.ba-tag-before{left:10px}
+.ba-tag-after{right:10px}
+
+/* trusted-by proof */
+.lp-proof{margin-top:2.4rem;text-align:center}
+.lp-proof .eyebrow{justify-content:center}
+.lp-stars{display:flex;align-items:center;justify-content:center;gap:.5em;margin:.2rem 0 .25rem}
+.lp-stars .stars{margin:0;font-size:1.15rem}
+.lp-stars b{font:800 1rem/1 var(--sans);color:var(--ink)}
+.lp-stars-note{font-size:.85rem;color:#7b8896;margin:0}
+.lp-stars-note a{color:var(--deep);font-weight:600}
+.lp-testi-grid{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.4rem;text-align:left}
+.lp-testi{background:var(--white);border:1px solid var(--rule);border-radius:var(--r);padding:1.5rem 1.4rem;box-shadow:var(--shadow)}
+.lp-testi svg{width:22px;height:22px;color:var(--azure);margin-bottom:.6rem}
+.lp-testi p{font-family:var(--display);font-size:1rem;line-height:1.45;color:var(--ink);font-variation-settings:"SOFT" 20,"WONK" 1;margin:0 0 .8rem}
+.lp-testi cite{font-style:normal;font-weight:700;font-size:.86rem;color:var(--deep)}
+
+/* stat bar */
+.stat-bar{margin-top:2.2rem;background:var(--ink);border-radius:var(--r);padding:1.8rem 1.4rem 1.6rem;box-shadow:var(--shadow-lg)}
+.stat-bar ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,1fr);gap:1.5rem;text-align:center}
+.stat-bar li{color:rgba(255,255,255,.85)}
+.stat-bar svg{width:24px;height:24px;color:var(--gold-lt);margin:0 auto .5rem}
+.stat-bar b{display:block;font-family:var(--display);font-weight:700;font-size:1.12rem;color:#fff;line-height:1.2}
+.stat-bar span{display:block;font-size:.76rem;line-height:1.3;margin-top:.2rem}
+.stat-tag{margin:1.5rem 0 0;text-align:center;font:600 .82rem/1 var(--sans);letter-spacing:.02em;color:var(--gold-lt)}
+@media (min-width:560px){ .stat-bar ul{grid-template-columns:repeat(4,1fr)} }
+@media (min-width:560px){
+  .lp-feats{grid-template-columns:repeat(3,1fr);gap:1rem}
+  .lp-feats li{flex-direction:column;align-items:center;gap:.4rem;text-align:center}
+  .lp-feats svg{margin:0 0 .1rem}
+}
+@media (min-width:640px){ .lp-testi-grid{grid-template-columns:repeat(3,1fr)} }
+
 /* ---------- 6. FUNNEL ---------- */
 .funnel{
   max-width:520px;margin:.7rem auto 0;background:var(--white);
@@ -419,8 +494,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   .lp{min-height:100svh;padding-bottom:.7rem}
   .lp-top{padding:.55rem 0 0}
   .lp-head{padding:.55rem 0 .15rem}
-  .lp-head h1{font-size:clamp(1.5rem,6.8vw,1.9rem);max-width:12ch}
-  .lp-head p{display:none}
+  .lp-head h1{font-size:clamp(1.5rem,6.8vw,1.9rem);max-width:14ch}
   .funnel{margin:.45rem auto 0}
   .fn-body{padding:.85rem .8rem 1rem}
   .fn-q{font-size:1.1rem}
@@ -630,14 +704,72 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 
       <div class="lp-top"><span data-logo></span></div>
 
-      <div class="lp-head">
-        <span class="lp-badge">Booking mornings this week</span>
-        <h1>Your Austin windows, cleaned<br><em>this week</em>.</h1>
-        <p>Answer five quick questions and leave your number — we'll call with your price, no sales visit.</p>
+      <!-- ===== SPLASH — funnel first page ===== -->
+      <div class="lp-splash" id="lpSplash">
+        <div class="lp-head">
+          <h1>See what your window cleaning would cost.</h1>
+          <p>Answer a few quick questions and we'll call with your price — about 60 seconds, no sales visit.</p>
+        </div>
+
+        <ul class="lp-feats">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><span><b>Takes 60 seconds</b>Quick &amp; easy, right from your phone</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 10.6 4.6-1.2 8-5.6 8-10.6V5l-8-3Z"/></svg><span><b>No obligation</b>100% free estimate</span></li>
+          <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/><path d="M19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9L19 14z"/></svg><span><b>Crystal-clear results</b>You'll love the difference</span></li>
+        </ul>
+
+        <button type="button" class="btn btn-gold btn-block lp-cta" id="splashCta">
+          Build my quote
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </button>
+        <p class="lp-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>Fast. Secure. No spam.</p>
+
+        <div class="baSlider" id="baSlider" role="img" aria-label="Drag to compare a window before and after a Window Wizard cleaning">
+          <img class="ba-after" data-photo="hero" alt="">
+          <div class="ba-before-wrap">
+            <img class="ba-before" data-photo="hero" alt="">
+          </div>
+          <div class="ba-handle"><span class="ba-grip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 7 4 12l4 5M16 7l4 5-4 5"/></svg></span></div>
+          <span class="ba-tag ba-tag-before">Before</span>
+          <span class="ba-tag ba-tag-after">After</span>
+        </div>
+
+        <div class="lp-proof">
+          <p class="eyebrow">Trusted by Austin homeowners</p>
+          <div class="lp-stars"><span class="stars">★★★★★</span><b>5.0</b></div>
+          <p class="lp-stars-note">Based on <a href="https://share.google/IVeIGTMAFmksPqQTZ" target="_blank" rel="noopener noreferrer">4 Google reviews</a></p>
+
+          <div class="lp-testi-grid">
+            <div class="lp-testi">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6C4.87 8.1 3.5 10.7 3.5 13.5c0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L7.17 6Zm9.5 0c-2.3 2.1-3.7 4.7-3.7 7.5 0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L16.67 6Z"/></svg>
+              <p>"Did a very good job, was on time, and price as quoted no bait and switching."</p>
+              <cite>— Nathan Sadlowski</cite>
+            </div>
+            <div class="lp-testi">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6C4.87 8.1 3.5 10.7 3.5 13.5c0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L7.17 6Zm9.5 0c-2.3 2.1-3.7 4.7-3.7 7.5 0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L16.67 6Z"/></svg>
+              <p>"I wish that I could give Gabriel 10 stars for washing the outside of my windows which were without a doubt in serious need of cleaning."</p>
+              <cite>— Judith Fox</cite>
+            </div>
+            <div class="lp-testi">
+              <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6C4.87 8.1 3.5 10.7 3.5 13.5c0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L7.17 6Zm9.5 0c-2.3 2.1-3.7 4.7-3.7 7.5 0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L16.67 6Z"/></svg>
+              <p>"Professional. Polite. Proficient and thorough. Gabriel was the consummate professional, returning the following day to make certain everything was done to our satisfaction."</p>
+              <cite>— Mark Beames</cite>
+            </div>
+          </div>
+        </div>
+
+        <div class="stat-bar">
+          <ul>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2 4 5v6c0 5 3.4 9.4 8 10.6 4.6-1.2 8-5.6 8-10.6V5l-8-3Z"/></svg><b>Licensed</b><span>&amp; insured</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M8 12.5l2.5 2.5L16 9"/></svg><b>100%</b><span>Satisfaction guaranteed</span></li>
+            <li><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l1.8 5.2L19 9l-5.2 1.8L12 16l-1.8-5.2L5 9l5.2-1.8L12 2z"/><path d="M19 14l.9 2.6 2.6.9-2.6.9L19 21l-.9-2.6-2.6-.9 2.6-.9L19 14z"/></svg><b>5.0-Star</b><span>Rated on Google</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><b>On-Time</b><span>Every visit</span></li>
+          </ul>
+          <p class="stat-tag">Sparkling Windows, Happier Homes.</p>
+        </div>
       </div>
 
       <!-- ===== FUNNEL ===== -->
-      <div class="funnel">
+      <div class="funnel" id="funnelCard" hidden>
         <div class="fn-bar"><i id="fnBar"></i></div>
         <div class="fn-body">
 
@@ -851,12 +983,16 @@ function route(){
     ? "Get your window cleaning price — Window Wizard, Austin"
     : "Window Wizard — Window Cleaning in Austin, TX";
   window.scrollTo(0,0);
-  track(isQuote ? "ViewContent" : "PageView", {content_name:name});
+  // Both routes are marketing/landing content at this point — the funnel
+  // itself (the thing ViewContent should mean) only starts once "Build my
+  // quote" is clicked, see the splash-cta handler below.
+  track("PageView", {content_name:name});
   // Custom event, not $pageview: this is a single-page app that swaps
   // views via hash/history changes rather than a real navigation, and
   // PostHog's automatic $pageview (from `defaults`) already covers the
   // very first load — a second manual $pageview here would double-count it.
   ph("page_viewed", {page:name});
+  if(isQuote) ph("quote_splash_viewed");
 }
 addEventListener("hashchange", route);
 addEventListener("popstate", route);
@@ -882,6 +1018,55 @@ route();
     dock.classList.toggle("is-visible", entry.boundingClientRect.top < 0);
   }, {threshold:0});
   io.observe(cta);
+})();
+
+/* ============================================================
+   SPLASH — funnel first page. Reveals the funnel card on click,
+   same reveal for every entry point (no separate step number,
+   the real funnel's own step-1 tracking fires once it's shown).
+   CTA click is the ViewContent moment: it's the first time the
+   visitor is actually engaging with the quote-building content,
+   as opposed to just landing on the marketing page around it.
+   ============================================================ */
+(function(){
+  const cta = $("#splashCta");
+  const splash = $("#lpSplash");
+  const funnelCard = $("#funnelCard");
+  if(!cta || !splash || !funnelCard) return;
+  cta.addEventListener("click", ()=>{
+    track("ViewContent", {content_name:"quote_funnel_started"});
+    ph("quote_splash_cta_clicked");
+    splash.hidden = true;
+    funnelCard.hidden = false;
+    show(1);
+    funnelCard.scrollIntoView({block:"start", behavior:"smooth"});
+  });
+})();
+
+/* ============================================================
+   BEFORE/AFTER SLIDER — drag or tap to compare
+   ============================================================ */
+(function(){
+  const el = $("#baSlider");
+  if(!el) return;
+  const wrap = $(".ba-before-wrap", el);
+  const handle = $(".ba-handle", el);
+  function setPos(pct){
+    pct = Math.max(0, Math.min(100, pct));
+    wrap.style.clipPath = `inset(0 ${100-pct}% 0 0)`;
+    handle.style.left = pct + "%";
+  }
+  function posFromEvent(e){
+    const r = el.getBoundingClientRect();
+    return ((e.clientX - r.left) / r.width) * 100;
+  }
+  let dragging = false;
+  el.addEventListener("pointerdown", e=>{
+    dragging = true; el.setPointerCapture(e.pointerId); setPos(posFromEvent(e));
+  });
+  el.addEventListener("pointermove", e=>{ if(dragging) setPos(posFromEvent(e)); });
+  ["pointerup","pointercancel"].forEach(ev=>el.addEventListener(ev, ()=>dragging=false));
+  setPos(50);
 })();
 
 /* ============================================================
