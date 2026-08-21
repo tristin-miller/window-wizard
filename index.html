@@ -147,6 +147,27 @@ p{margin:0 0 1em}
 .topbar .btn{min-height:46px;font-size:.98rem;padding:0 1.25em}
 .tel-link{font-weight:700;color:var(--ink);text-decoration:none;white-space:nowrap}
 
+/* floating google review pill */
+.review-pill{
+  position:fixed;top:86px;right:20px;z-index:55;
+  display:flex;align-items:center;gap:.5em;
+  background:rgba(255,255,255,.92);backdrop-filter:blur(10px) saturate(1.3);
+  border:1px solid var(--rule);border-radius:999px;
+  padding:.5em .95em .5em .6em;box-shadow:var(--shadow);
+  text-decoration:none;color:var(--ink);
+  font:600 .82rem/1 var(--sans);letter-spacing:-.01em;
+  transition:transform .16s cubic-bezier(.2,.7,.3,1),box-shadow .16s;
+}
+.review-pill:hover{transform:translateY(-2px);box-shadow:var(--shadow-lg)}
+.review-pill svg{flex:none;width:18px;height:18px}
+.review-pill .stars{color:var(--gold);letter-spacing:.02em;font-size:.86em}
+.review-pill b{font-weight:700}
+.review-pill .muted{color:var(--body);font-weight:500}
+@media (max-width:560px){
+  .review-pill{top:78px;right:12px;padding:.42em .8em .42em .55em;font-size:.74rem;gap:.4em}
+  .review-pill svg{width:15px;height:15px}
+}
+
 /* ---------- 4. HOME ---------- */
 
 /* HERO — the signature: drag the squeegee */
@@ -242,10 +263,21 @@ p{margin:0 0 1em}
 
 /* quotes */
 .quotes{display:grid;gap:1.1rem;grid-template-columns:1fr;margin-top:2.4rem}
-.quote{background:var(--white);border-radius:var(--r);padding:1.6rem 1.5rem;border:1px solid var(--rule);box-shadow:var(--shadow)}
+.quote{
+  display:flex;flex-direction:column;background:var(--white);border-radius:var(--r);padding:1.6rem 1.5rem;
+  border:1px solid var(--rule);box-shadow:var(--shadow);text-decoration:none;
+  transition:transform .16s cubic-bezier(.2,.7,.3,1),box-shadow .16s,border-color .16s;
+}
+.quote:hover{transform:translateY(-3px);box-shadow:var(--shadow-lg);border-color:var(--azure)}
 .band-white .quote{background:var(--pane)}
 .quote p{font-family:var(--display);font-size:1.16rem;line-height:1.42;color:var(--ink);font-variation-settings:"SOFT" 30,"WONK" 1}
 .quote cite{display:block;font-style:normal;font-size:.86rem;font-weight:600;color:var(--azure);letter-spacing:.04em}
+.quote .via{
+  display:flex;align-items:center;gap:.4em;margin-top:auto;padding-top:.9rem;
+  font:600 .78rem/1 var(--sans);letter-spacing:.02em;color:var(--body);
+}
+.quote .via svg{flex:none;width:15px;height:15px}
+.quote:hover .via{color:var(--azure)}
 .stars{color:var(--gold);letter-spacing:.14em;font-size:.94rem;margin-bottom:.7rem}
 
 /* areas */
@@ -428,10 +460,16 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         <span data-logo></span>
         <span><b>Window Wizard</b><span>Austin, Texas</span></span>
       </a>
-      <a class="tel-link" href="tel:+15125550147" data-phone-link>(512) 555-0147</a>
+      <a class="tel-link" href="tel:+16085476456" data-phone-link>(608) 547-6456</a>
       <a class="btn btn-gold" href="/quote">Get my price</a>
     </div>
   </header>
+
+  <a class="review-pill" href="https://share.google/IVeIGTMAFmksPqQTZ" target="_blank" rel="noopener noreferrer" aria-label="5.0 out of 5 stars on Google, 4 reviews — read them on Google">
+    <svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18A13.98 13.98 0 0 1 10.94 24c0-1.45.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>
+    <span class="stars">★★★★★</span>
+    <span><b>5.0</b> <span class="muted">(4)</span></span>
+  </a>
 
   <!-- HERO: drag the squeegee -->
   <section class="hero">
@@ -446,7 +484,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         <p class="hero-sub">Window cleaning for Austin homes. Screens, tracks and sills included — not billed as extras after the fact.</p>
         <div class="hero-cta">
           <a class="btn btn-gold" href="/quote">Get my price — about 60 seconds</a>
-          <a class="btn btn-ghost" href="tel:+15125550147" data-phone-link>Or call (512) 555-0147</a>
+          <a class="btn btn-ghost" href="tel:+16085476456" data-phone-link>Or call (608) 547-6456</a>
         </div>
       </div>
     </div>
@@ -536,11 +574,25 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <p class="eyebrow">From the neighborhood</p>
       <h2>What people say afterward.</h2>
       <div class="quotes">
-        <blockquote class="quote"><div class="stars">★★★★★</div><p>"I hadn't seen out of the back sunroom properly in four years. Took him one morning."</p><cite>— Marge H., Northwest Hills</cite></blockquote>
-        <blockquote class="quote"><div class="stars">★★★★★</div><p>"Quoted me on the phone, charged me exactly that. Rarer than it should be."</p><cite>— Dale W., Circle C</cite></blockquote>
-        <blockquote class="quote"><div class="stars">★★★★★</div><p>"He did the tracks without me asking. My mother would have approved."</p><cite>— Ana R., Cherrywood</cite></blockquote>
+        <a class="quote" href="https://share.google/IVeIGTMAFmksPqQTZ" target="_blank" rel="noopener noreferrer">
+          <div class="stars">★★★★★</div>
+          <p>"Did a very good job, was on time, and price as quoted no bait and switching. I highly recommend them to anyone wanting good work by a local business."</p>
+          <cite>— Nathan Sadlowski</cite>
+          <span class="via"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18A13.98 13.98 0 0 1 10.94 24c0-1.45.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>Read on Google</span>
+        </a>
+        <a class="quote" href="https://share.google/IVeIGTMAFmksPqQTZ" target="_blank" rel="noopener noreferrer">
+          <div class="stars">★★★★★</div>
+          <p>"I wish that I could give Gabriel 10 stars for washing the outside of my windows which were without a doubt in serious need of cleaning. I did not know how dirty they had been until he had finished the job. There were a couple of windows that needed some work inside my house so he came inside to clean the area that needed some work. When I considered the size and number of our windows, his estimate before starting the job sounded reasonable. He worked very hard for many hours in Texas heat. I was so impressed with his work and his work ethic that I honestly felt that I had not paid him enough. I tried to pay him a little more but he said that I paid him correctly & he refused my offer. Gabriel is personable & I strongly recommend him."</p>
+          <cite>— Judith Fox</cite>
+          <span class="via"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18A13.98 13.98 0 0 1 10.94 24c0-1.45.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>Read on Google</span>
+        </a>
+        <a class="quote" href="https://share.google/IVeIGTMAFmksPqQTZ" target="_blank" rel="noopener noreferrer">
+          <div class="stars">★★★★★</div>
+          <p>"Professional. Polite. Proficient and thorough. Gabriel was the consummate professional, returning the following day to make certain everything was done to our satisfaction. If I'm lucky, I can get him next year for a repeat, quality job."</p>
+          <cite>— Mark Beames</cite>
+          <span class="via"><svg viewBox="0 0 48 48" aria-hidden="true"><path fill="#4285F4" d="M45.12 24.5c0-1.56-.14-3.06-.4-4.5H24v8.51h11.84c-.51 2.75-2.06 5.08-4.39 6.64v5.52h7.11c4.16-3.83 6.56-9.47 6.56-16.17z"/><path fill="#34A853" d="M24 46c5.94 0 10.92-1.97 14.56-5.33l-7.11-5.52c-1.97 1.32-4.49 2.1-7.45 2.1-5.73 0-10.58-3.87-12.31-9.07H4.34v5.7C7.96 41.07 15.4 46 24 46z"/><path fill="#FBBC05" d="M11.69 28.18A13.98 13.98 0 0 1 10.94 24c0-1.45.25-2.86.69-4.18v-5.7H4.34A21.99 21.99 0 0 0 2 24c0 3.55.85 6.91 2.34 9.88z"/><path fill="#EA4335" d="M24 10.75c3.23 0 6.13 1.11 8.41 3.29l6.31-6.31C34.91 4.18 29.93 2 24 2 15.4 2 7.96 6.93 4.34 14.12l7.35 5.7c1.73-5.2 6.58-9.07 12.31-9.07z"/></svg>Read on Google</span>
+        </a>
       </div>
-      <p class="fn-note" style="text-align:left;margin-top:1.4rem">Swap these for your real reviews before you run traffic — placeholder testimonials on a live site are worth less than none.</p>
     </div>
   </section>
 
@@ -570,13 +622,13 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
     <div class="wrap">
       <div class="fbrand">Window Wizard</div>
       <p>Residential window cleaning · Austin, TX &amp; surrounding areas<br>
-      <a href="tel:+15125550147" data-phone-link>(512) 555-0147</a> · <a href="mailto:hello@windowwizardatx.com" data-email-link>hello@windowwizardatx.com</a></p>
+      <a href="tel:+16085476456" data-phone-link>(608) 547-6456</a> · <a href="mailto:hello@windowwizardatx.com" data-email-link>hello@windowwizardatx.com</a></p>
       <p style="margin:0;opacity:.6">© <span id="yr"></span> Window Wizard. Licensed &amp; insured.</p>
     </div>
   </footer>
 
   <div class="dock">
-    <a class="btn btn-ghost" href="tel:+15125550147" data-phone-link>Call</a>
+    <a class="btn btn-ghost" href="tel:+16085476456" data-phone-link>Call</a>
     <a class="btn btn-gold" href="/quote">Get my price</a>
   </div>
 </div>
@@ -691,7 +743,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
             <p class="fn-help">We'll text to confirm your morning. No spam, no drip campaign.</p>
 
             <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name" enterkeyhint="next"><p class="err">Please add your name.</p></div>
-            <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(512) 555-0147" enterkeyhint="next"><p class="err">Please add a phone number we can text.</p></div>
+            <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="next"><p class="err">Please add a phone number we can text.</p></div>
             <div class="field"><label for="f-zip">Zip code</label><input id="f-zip" type="text" inputmode="numeric" maxlength="5" autocomplete="postal-code" placeholder="78704"><p class="err">Please add a 5-digit zip.</p></div>
             <div class="field"><label for="f-date">Preferred day</label><input id="f-date" type="date"><p class="err">Please pick a day.</p></div>
             <div class="field">
@@ -715,7 +767,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
               <div class="seal"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
               <h2>Got it — you're on the list.</h2>
               <p>We'll text you within a few hours to lock in your morning. If it's urgent, just call.</p>
-              <a class="btn btn-gold btn-block" href="tel:+15125550147" data-phone-link style="margin-top:1rem">Call (512) 555-0147</a>
+              <a class="btn btn-gold btn-block" href="tel:+16085476456" data-phone-link style="margin-top:1rem">Call (608) 547-6456</a>
             </div>
           </section>
 
@@ -724,7 +776,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 
       <p class="lp-foot">
         Window Wizard · Austin, TX · Licensed &amp; insured<br>
-        Prefer to talk? <a href="tel:+15125550147" data-phone-link>(512) 555-0147</a>
+        Prefer to talk? <a href="tel:+16085476456" data-phone-link>(608) 547-6456</a>
       </p>
     </div>
   </div>
@@ -737,8 +789,8 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
    ============================================================ */
 
 const BIZ = {
-  phone:        "(512) 555-0147",     // display
-  phoneRaw:     "+15125550147",       // tel: link
+  phone:        "(608) 547-6456",     // display
+  phoneRaw:     "+16085476456",       // tel: link
   email:        "hello@windowwizardatx.com",
   // Formspree endpoint — emails the inbox tied to this form on every quote request.
   formEndpoint: "https://formspree.io/f/xeajprvj"
