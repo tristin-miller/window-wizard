@@ -357,38 +357,12 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .lp-secure{display:flex;align-items:center;justify-content:center;gap:.4em;margin:.65rem 0 0;font-size:.82rem;color:#7b8896}
 .lp-secure svg{flex:none;width:14px;height:14px}
 
-/* before / after drag slider */
-.baSlider{
+/* photo showcase */
+.lp-photo{
   position:relative;margin-top:1.7rem;border-radius:var(--r);overflow:hidden;
   box-shadow:var(--shadow-lg);aspect-ratio:4/3;background:var(--ink);
-  touch-action:pan-y;user-select:none;cursor:ew-resize;
 }
-.baSlider img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;pointer-events:none}
-.ba-before-wrap{position:absolute;inset:0;clip-path:inset(0 50% 0 0)}
-.ba-before-wrap img{filter:saturate(.42) contrast(.8) brightness(.86) blur(1.1px)}
-.ba-before-wrap::after{
-  content:"";position:absolute;inset:0;
-  background:
-    radial-gradient(circle at 18% 24%,rgba(196,178,140,.5) 0 2px,transparent 3px),
-    radial-gradient(circle at 62% 12%,rgba(196,178,140,.4) 0 3px,transparent 4px),
-    radial-gradient(circle at 84% 61%,rgba(196,178,140,.45) 0 2px,transparent 3px),
-    radial-gradient(circle at 33% 74%,rgba(196,178,140,.4) 0 3px,transparent 4px),
-    radial-gradient(circle at 71% 88%,rgba(196,178,140,.35) 0 2px,transparent 3px),
-    linear-gradient(115deg,rgba(150,134,102,.34),rgba(120,116,100,.2));
-  mix-blend-mode:multiply;
-}
-.ba-handle{position:absolute;top:0;bottom:0;left:50%;width:3px;background:#fff;transform:translateX(-50%);box-shadow:0 0 0 1px rgba(11,27,43,.25);pointer-events:none}
-.ba-grip{
-  position:absolute;top:50%;left:50%;width:38px;height:38px;border-radius:50%;background:#fff;
-  transform:translate(-50%,-50%);display:grid;place-items:center;box-shadow:var(--shadow);
-  color:var(--deep);pointer-events:none;
-}
-.ba-tag{
-  position:absolute;bottom:10px;font:700 .68rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;
-  color:#fff;background:rgba(11,27,43,.55);padding:.4em .7em;border-radius:999px;pointer-events:none;
-}
-.ba-tag-before{left:10px}
-.ba-tag-after{right:10px}
+.lp-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 
 /* trusted-by proof */
 .lp-proof{margin-top:2.4rem;text-align:center}
@@ -741,14 +715,8 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         </button>
         <p class="lp-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>Fast. Secure. No spam.</p>
 
-        <div class="baSlider" id="baSlider" role="img" aria-label="Drag to compare a window before and after a Window Wizard cleaning">
-          <img class="ba-after" data-photo="hero" alt="">
-          <div class="ba-before-wrap">
-            <img class="ba-before" data-photo="hero" alt="">
-          </div>
-          <div class="ba-handle"><span class="ba-grip"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M8 7 4 12l4 5M16 7l4 5-4 5"/></svg></span></div>
-          <span class="ba-tag ba-tag-before">Before</span>
-          <span class="ba-tag ba-tag-after">After</span>
+        <div class="lp-photo">
+          <img data-photo="hero" alt="Freshly cleaned windows on an Austin home">
         </div>
 
         <div class="lp-proof">
@@ -872,6 +840,8 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
             <p class="fn-count">Last step</p>
             <h2 class="fn-q">What's the best number to call?</h2>
             <p class="fn-help">We'll call within a few hours with your price — no forms, no waiting on hold.</p>
+
+            <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name" placeholder="Jane Smith"><p class="err">Please add your name.</p></div>
 
             <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="done"><p class="err">Please add a phone number we can call.</p></div>
 
@@ -1086,32 +1056,6 @@ route();
 })();
 
 /* ============================================================
-   BEFORE/AFTER SLIDER — drag or tap to compare
-   ============================================================ */
-(function(){
-  const el = $("#baSlider");
-  if(!el) return;
-  const wrap = $(".ba-before-wrap", el);
-  const handle = $(".ba-handle", el);
-  function setPos(pct){
-    pct = Math.max(0, Math.min(100, pct));
-    wrap.style.clipPath = `inset(0 ${100-pct}% 0 0)`;
-    handle.style.left = pct + "%";
-  }
-  function posFromEvent(e){
-    const r = el.getBoundingClientRect();
-    return ((e.clientX - r.left) / r.width) * 100;
-  }
-  let dragging = false;
-  el.addEventListener("pointerdown", e=>{
-    dragging = true; el.setPointerCapture(e.pointerId); setPos(posFromEvent(e));
-  });
-  el.addEventListener("pointermove", e=>{ if(dragging) setPos(posFromEvent(e)); });
-  ["pointerup","pointercancel"].forEach(ev=>el.addEventListener(ev, ()=>dragging=false));
-  setPos(50);
-})();
-
-/* ============================================================
    FUNNEL
    ============================================================ */
 const A = { count:12, type:null, sides:null, screens:false, tracks:false, gutters:false };
@@ -1247,6 +1191,7 @@ function buildEstimate(){
 /* --- submit --- */
 $("#submitBtn").addEventListener("click", async ()=>{
   const fields = [
+    ["#f-name", v=>v.trim().length>=2],
     ["#f-phone", v=>v.replace(/\D/g,"").length>=10]
   ];
   let ok = true, first = null;
@@ -1260,12 +1205,13 @@ $("#submitBtn").addEventListener("click", async ()=>{
 
   const est = calc();
   const payload = {
+    name:$("#f-name").value.trim(),
     phone:$("#f-phone").value.trim(),
     windows:A.count, windowType:A.type, sides:A.sides,
     screens:A.screens, tracks:A.tracks, gutters:A.gutters,
     estimate: `${money(est.low)}–${money(est.high)}`,
     source:"meta-ads-landing", submittedAt:new Date().toISOString(),
-    _subject: `New quote request — ${$("#f-phone").value.trim() || "no phone"}` // Formspree email subject
+    _subject: `New quote request — ${$("#f-name").value.trim() || "no name"}` // Formspree email subject
   };
 
   const btn = $("#submitBtn");
