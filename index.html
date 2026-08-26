@@ -414,7 +414,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .opts{display:grid;gap:.6rem}
 .opt{
   display:flex;align-items:center;gap:1rem;width:100%;text-align:left;
-  min-height:44px;padding:.72rem .85rem;border:2px solid #dbe5ec;background:var(--white);
+  min-height:var(--tap);padding:.72rem .85rem;border:2px solid #dbe5ec;background:var(--white);
   border-radius:var(--r);transition:border-color .15s,background .15s,transform .12s;
 }
 .opt:hover{border-color:var(--azure);background:#f6fafc}
@@ -422,24 +422,28 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .opt.is-on{border-color:var(--azure);background:#eef6fc;box-shadow:inset 0 0 0 1px var(--azure)}
 .opt strong{display:block;font-weight:700;color:var(--ink);font-size:1.06rem;line-height:1.25}
 .opt small{display:block;color:#6d7d8c;font-size:.87rem;line-height:1.35;margin-top:.15rem}
-.opt .dia{flex:none;width:56px;height:44px;color:var(--deep)}
 .opt .tick{
   flex:none;margin-left:auto;width:26px;height:26px;border-radius:50%;
   border:2px solid #cfdbe4;display:grid;place-items:center;color:transparent;
 }
 .opt.is-on .tick{background:var(--azure);border-color:var(--azure);color:#fff}
 
-/* stepper */
-.stepper{display:flex;align-items:center;justify-content:center;gap:1rem;margin:.25rem 0 .8rem}
-.stepper button{
-  width:56px;height:56px;border-radius:50%;border:2px solid var(--deep);background:var(--white);
-  font:400 1.8rem/1 var(--sans);color:var(--deep);display:grid;place-items:center;
+/* large tap-button grid — window count / grid amount */
+.opts-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}
+.chip2{
+  min-height:var(--tap);display:flex;align-items:center;justify-content:center;text-align:center;
+  border:2px solid #dbe5ec;background:#fff;border-radius:var(--r);padding:.6rem .5rem;
+  font:700 1.05rem/1.2 var(--sans);color:var(--deep);
+  transition:border-color .15s,background .15s,transform .12s;
 }
-.stepper button:hover{background:var(--deep);color:#fff}
-.stepper output{font-family:var(--display);font-weight:700;font-size:3rem;color:var(--ink);min-width:2.6ch;text-align:center;font-variant-numeric:tabular-nums}
-.chips{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center;margin-bottom:.9rem}
-.chip{border:1.5px solid #dbe5ec;background:#fff;border-radius:999px;padding:.5em .95em;font-weight:600;font-size:.9rem;color:var(--deep);min-height:40px}
-.chip:hover,.chip.is-on{border-color:var(--azure);background:#eef6fc}
+.chip2:hover{border-color:var(--azure);background:#f6fafc}
+.chip2:active{transform:scale(.985)}
+.chip2.is-on{border-color:var(--azure);background:#eef6fc;box-shadow:inset 0 0 0 1px var(--azure);color:var(--ink)}
+.fn-subq{margin-top:1.5rem}
+.fn-subq:first-child{margin-top:0}
+.fn-err{display:none;color:#C0392B;font-size:.88rem;font-weight:600;text-align:center;margin:.9rem 0 0}
+.estimate-line{font:700 1.5rem/1.3 var(--display);color:var(--ink);margin:.9rem 0 .2rem;font-variation-settings:"SOFT" 20,"WONK" 1}
+.estimate-caveat{font-size:.82rem;color:#7b8896;line-height:1.5;margin:0 0 .3rem}
 
 /* fields */
 .field{margin-bottom:1rem}
@@ -491,7 +495,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   .fn-body{padding:.85rem .8rem 1rem}
   .fn-q{font-size:1.1rem}
   .fn-help{margin-bottom:.6rem;font-size:.8rem}
-  .opt{min-height:42px;padding:.65rem .8rem}
+  .opt{min-height:52px;padding:.65rem .8rem}
   .fn-nav{margin-top:.8rem}
 }
 @media (prefers-reduced-motion:reduce){
@@ -614,7 +618,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <p class="eyebrow">How it goes</p>
       <h2>Three steps, and none of them are yours.</h2>
       <ol class="steps">
-        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>Five taps on your phone, then leave your number — we'll call you back with your price.</p></div></li>
+        <li><span class="n">1</span><div><h3>Tell us about your windows</h3><p>A couple of taps on your phone, then leave your info — we'll get back to you with your price.</p></div></li>
         <li><span class="n">2</span><div><h3>Pick a morning</h3><p>We work 6am to 2pm. We'll lock in your day on that call, then text the arrival window the night before.</p></div></li>
         <li><span class="n">3</span><div><h3>Walk it with us</h3><p>When we're done, we walk the house with you. Anything you're not happy with gets redone on the spot.</p></div></li>
       </ol>
@@ -666,7 +670,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   <section class="close-cta">
     <div class="wrap">
       <h2>See what you've been missing.</h2>
-      <p>Answer five quick questions and leave your number — we'll call with your price, no sales visit.</p>
+      <p>Answer a couple of quick questions and leave your info — we'll get back to you with your price, no sales visit.</p>
       <a class="btn btn-gold" href="/quote">Get my price</a>
     </div>
   </section>
@@ -759,104 +763,70 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         <div class="fn-bar"><i id="fnBar"></i></div>
         <div class="fn-body">
 
-          <!-- S1 count -->
+          <!-- S1 what to clean -->
           <section class="fn-step is-active" data-step="1">
-            <p class="fn-count">Question 1 of 5</p>
-            <h2 class="fn-q">About how many windows?</h2>
-            <p class="fn-help">A rough count is fine. We confirm it on site — and if you're over, the price doesn't move.</p>
-            <div class="stepper">
-              <button type="button" id="minus" aria-label="One fewer window">−</button>
-              <output id="count" aria-live="polite">12</output>
-              <button type="button" id="plus" aria-label="One more window">+</button>
+            <p class="fn-count">Question 1 of 2</p>
+            <h2 class="fn-q">What would you like cleaned?</h2>
+            <p class="fn-help">Tracks and sills are always included, either way.</p>
+            <div class="opts">
+              <button class="opt" data-set="sides" data-val="out"><span><strong>Exterior windows only</strong><small>Nobody needs to be home</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+              <button class="opt" data-set="sides" data-val="both"><span><strong>Inside + outside windows</strong><small>The full job — what most people book</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
             </div>
-            <div class="chips">
-              <button class="chip" data-count="8">8</button>
-              <button class="chip" data-count="12">12</button>
-              <button class="chip" data-count="18">18</button>
-              <button class="chip" data-count="25">25</button>
-              <button class="chip" data-count="35">35+</button>
-            </div>
-            <button class="btn btn-gold btn-block" data-next>Next</button>
           </section>
 
-          <!-- S2 type -->
+          <!-- S2 count + grids -->
           <section class="fn-step" data-step="2">
-            <p class="fn-count">Question 2 of 5</p>
-            <h2 class="fn-q">Which looks most like your windows?</h2>
-            <p class="fn-help">Go by the picture, not the name. Pick the closest match.</p>
-            <div class="opts">
-              <button class="opt" data-set="type" data-val="single">
-                <svg class="dia" viewBox="0 0 70 56" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="4" width="62" height="48" rx="1.5"/></svg>
-                <span><strong>One big pane</strong><small>Nothing crossing the glass</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
-              </button>
-              <button class="opt" data-set="type" data-val="hung">
-                <svg class="dia" viewBox="0 0 70 56" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="4" width="62" height="48" rx="1.5"/><path d="M4 28h62"/></svg>
-                <span><strong>Two panes, one line</strong><small>Slides up and down, or side to side</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
-              </button>
-              <button class="opt" data-set="type" data-val="grid">
-                <svg class="dia" viewBox="0 0 70 56" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="4" width="62" height="48" rx="1.5"/><g stroke-width="1.3"><path d="M24.7 4v48M45.3 4v48M4 20h62M4 36h62"/></g></svg>
-                <span><strong>Grid on the glass</strong><small>Thin bars — often <em>between</em> the panes</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
-              </button>
-              <button class="opt" data-set="type" data-val="french">
-                <svg class="dia" viewBox="0 0 70 56" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="4" width="62" height="48" rx="1.5"/><path d="M24.7 4v48M45.3 4v48M4 20h62M4 36h62"/></svg>
-                <span><strong>Real divided panes</strong><small>Thick wood bars, each little pane separate</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
-              </button>
-              <button class="opt" data-set="type" data-val="unsure">
-                <svg class="dia" viewBox="0 0 70 56" fill="none" stroke="currentColor" stroke-width="2.4"><rect x="4" y="4" width="62" height="48" rx="1.5"/><text x="35" y="38" text-anchor="middle" font-size="28" font-family="serif" stroke="none" fill="currentColor">?</text></svg>
-                <span><strong>Not sure</strong><small>No problem — we'll confirm when we arrive</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span>
-              </button>
+            <p class="fn-count">Question 2 of 2</p>
+            <h2 class="fn-q">About how many windows do you have?</h2>
+            <div class="opts-grid" data-group="count">
+              <button class="chip2" data-set="count" data-val="b1">1–10</button>
+              <button class="chip2" data-set="count" data-val="b2">11–20</button>
+              <button class="chip2" data-set="count" data-val="b3">21–35</button>
+              <button class="chip2" data-set="count" data-val="b4">36+</button>
+              <button class="chip2" data-set="count" data-val="unsure">Not sure</button>
             </div>
+
+            <h2 class="fn-q fn-subq">Do your windows have grids?</h2>
+            <div class="opts-grid" data-group="grids">
+              <button class="chip2" data-set="grids" data-val="none">No grids</button>
+              <button class="chip2" data-set="grids" data-val="few">A few</button>
+              <button class="chip2" data-set="grids" data-val="many">Many</button>
+              <button class="chip2" data-set="grids" data-val="unsure">Not sure</button>
+            </div>
+
+            <p class="fn-err" id="step2Err">Please answer both questions above.</p>
+            <button class="btn btn-gold btn-block" style="margin-top:1.2rem" data-next>Next</button>
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S3 sides -->
+          <!-- S3 contact / estimate -->
           <section class="fn-step" data-step="3">
-            <p class="fn-count">Question 3 of 5</p>
-            <h2 class="fn-q">Outside only, or inside too?</h2>
-            <p class="fn-help">Inside means we come in the house, so it takes longer.</p>
-            <div class="opts">
-              <button class="opt" data-set="sides" data-val="out"><span><strong>Outside only</strong><small>Nobody needs to be home</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-              <button class="opt" data-set="sides" data-val="both"><span><strong>Inside and outside</strong><small>The full job — what most people book</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-            </div>
-            <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
-          </section>
-
-          <!-- S4 extras -->
-          <section class="fn-step" data-step="4">
-            <p class="fn-count">Question 4 of 5</p>
-            <h2 class="fn-q">Anything to add?</h2>
-            <p class="fn-help">Tap any that apply, or skip.</p>
-            <div class="opts">
-              <button class="opt" data-toggle="screens"><span><strong>Clean the screens</strong><small>Pulled, washed, dried, put back</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-              <button class="opt" data-toggle="tracks"><span><strong>Detail the tracks &amp; sills</strong><small>Vacuumed and hand-wiped</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-              <button class="opt" data-toggle="gutters"><span><strong>Clean the gutters</strong><small>We'll quote it after a quick look</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-            </div>
-            <button class="btn btn-gold btn-block" style="margin-top:1.1rem" data-next>Continue</button>
-            <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
-          </section>
-
-          <!-- S5 contact -->
-          <section class="fn-step" data-step="5">
             <p class="fn-count">Last step</p>
-            <h2 class="fn-q">What's the best number to call?</h2>
-            <p class="fn-help">We'll call within a few hours with your price — no forms, no waiting on hold.</p>
+            <h2 class="fn-q">Get My Estimate</h2>
+            <p class="fn-help">Just a few details so we can get back to you with your price.</p>
 
-            <div class="field"><label for="f-name">Your name</label><input id="f-name" type="text" autocomplete="name" placeholder="Jane Smith"><p class="err">Please add your name.</p></div>
+            <div class="field"><label for="f-name">First name</label><input id="f-name" type="text" autocomplete="given-name" placeholder="Jane"><p class="err">Please add your first name.</p></div>
 
-            <div class="field"><label for="f-phone">Phone number</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="done"><p class="err">Please add a phone number we can call.</p></div>
+            <div class="field"><label for="f-phone">Mobile number</label><input id="f-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="next"><p class="err">Please add a mobile number we can reach you at.</p></div>
 
-            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="submitBtn">Call me with my price</button>
-            <p class="fn-note">Nothing's booked and no price is set until we call. No spam, no drip campaign.</p>
+            <div class="field"><label for="f-address">Street address</label><input id="f-address" type="text" autocomplete="street-address" placeholder="123 Main St, Austin, TX"><p class="err">Please add the address to be cleaned.</p></div>
+
+            <div class="field"><label for="f-email">Email <span style="font-weight:400;color:#7b8896">(optional)</span></label><input id="f-email" type="email" autocomplete="email" placeholder="jane@email.com" enterkeyhint="done"><p class="err">That email doesn't look right.</p></div>
+
+            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="submitBtn">Get My Estimate</button>
+            <p class="fn-note">No obligation, and nothing's booked yet. No spam, no drip campaign.</p>
             <div class="fn-nav"><button class="fn-back" data-back>← Back</button></div>
           </section>
 
-          <!-- S6 done -->
-          <section class="fn-step" data-step="6">
+          <!-- S4 done -->
+          <section class="fn-step" data-step="4">
             <div class="done">
               <div class="seal"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-              <h2>Got it — we'll call you shortly.</h2>
-              <p>We'll ring you within a few hours with your price and find a morning that works. If it's urgent, just call us.</p>
-              <a class="btn btn-gold btn-block" href="tel:+16085476456" data-phone-link style="margin-top:1rem">Call (608) 547-6456</a>
+              <h2>Request received!</h2>
+              <p>Thanks—we received your request and will get back to you soon with pricing.</p>
+              <p class="estimate-line" id="estimateLine"></p>
+              <p class="estimate-caveat" id="estimateCaveat">This is an estimated range, not a guaranteed price — French panes, heavy buildup, difficult access, or damaged screens can change the final price.</p>
+              <a class="btn btn-gold btn-block" href="tel:+16085476456" data-phone-link style="margin-top:1rem">Or call us now: (608) 547-6456</a>
             </div>
           </section>
 
@@ -909,14 +879,22 @@ const PHOTOS = {
 };
 
 // ── PRICING ──────────────────────────────────────────────────
-// CONFIRM these against your real numbers before running traffic.
+// [low, high] ranges by: exterior-only vs inside+outside, no/few grids vs
+// many grids, and window-count bucket. The 36+ bucket is a "starting
+// around" figure rather than a range (both values equal).
 const PRICING = {
-  perWindow: { single:6, hung:12, grid:9, french:20, unsure:10 },
-  interior:  125,    // flat rate for inside cleaning, regardless of window count
-  screens:   4,      // per window (you said $3–$5 by screen type)  ← CONFIRM
-  tracks:    5,      // per window
-  minimum:   100     // job minimum
+  out: {
+    lowgrids: { b1:[100,145], b2:[145,245], b3:[245,395], b4:[395,395] },
+    many:     { b1:[125,185], b2:[185,315], b3:[315,495], b4:[495,495] }
+  },
+  both: {
+    lowgrids: { b1:[165,225], b2:[225,375], b3:[375,595], b4:[595,595] },
+    many:     { b1:[195,275], b2:[275,465], b3:[465,725], b4:[725,725] }
+  }
 };
+const COUNT_LABELS = { b1:"1–10", b2:"11–20", b3:"21–35", b4:"36+", unsure:"Not sure" };
+const GRID_LABELS  = { none:"No grids", few:"A few", many:"Many", unsure:"Not sure" };
+const SIDE_LABELS  = { out:"Exterior windows only", both:"Inside + outside windows" };
 /* ============================================================
    ▲▲▲ END EDITABLE BLOCK ▲▲▲
    ============================================================ */
@@ -1056,33 +1034,31 @@ route();
 })();
 
 /* ============================================================
-   FUNNEL
+   FUNNEL — 3 steps: (1) what to clean, (2) count + grids,
+   (3) contact/estimate. Step 4 is the done screen.
    ============================================================ */
-const A = { count:12, type:null, sides:null, screens:false, tracks:false, gutters:false };
+const A = { sides:null, count:null, grids:null };
 let step = 1;
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 3;
 
 const trackedSteps = new Set();
 function trackFunnelStep(n){
-  if(n < 1 || n > 6) return;
+  // Step 4 (done) isn't tracked here — it's tracked explicitly on submit,
+  // as "contact_submitted", carrying the full lead payload.
+  if(n < 1 || n > 3) return;
   if(trackedSteps.has(n)) return; // don't re-fire when the user goes back/forward
   trackedSteps.add(n);
   const stepMeta = {
-    1: {event:"AddToCart", name:"funnel_step_1_count", posthog:"window_count"},
-    2: {event:"CustomizeProduct", name:"funnel_step_2_type", posthog:"window_type"},
-    3: {event:"AddToWishlist", name:"funnel_step_3_sides", posthog:"cleaning_sides"},
-    4: {event:"AddToCart", name:"funnel_step_4_extras", posthog:"extras"},
-    5: {event:"ViewContent", name:"funnel_step_5_estimate", posthog:"estimate_contact"},
-    6: {event:"Lead", name:"funnel_step_6_booking", posthog:"booking_confirmed"}
+    1: {event:"AddToCart", name:"funnel_step_1_clean_type", posthog:"clean_type"},
+    2: {event:"CustomizeProduct", name:"funnel_step_2_count_grids", posthog:"count_grids"},
+    3: {event:"ViewContent", name:"funnel_step_3_contact", posthog:"contact_form"}
   };
   const meta = stepMeta[n];
-  if(meta){
-    track(meta.event, {content_name:meta.name, funnel_step:n});
-    // Single event name + a `step` property is the PostHog-recommended
-    // shape for a funnel — build the funnel insight by filtering this one
-    // event at each step, rather than defining six separate event names.
-    ph("quote_funnel_step_viewed", {step:n, step_name:meta.posthog});
-  }
+  track(meta.event, {content_name:meta.name, funnel_step:n});
+  // Single event name + a `step` property is the PostHog-recommended
+  // shape for a funnel — build the funnel insight by filtering this one
+  // event at each step, rather than defining separate event names.
+  ph("quote_funnel_step_viewed", {step:n, step_name:meta.posthog});
 }
 
 function show(n){
@@ -1097,102 +1073,60 @@ function show(n){
   trackFunnelStep(n);
 }
 
-function nextFrom(n){ return n+1; }
 function prevFrom(n){ return n-1; }
 
-// single-choice cards
+// single-choice tap buttons: S1 "sides", and S2's "count" and "grids" groups
 $$("[data-set]").forEach(btn=>{
   btn.addEventListener("click", ()=>{
     const key = btn.dataset.set;
     A[key] = btn.dataset.val;
     $$(`[data-set="${key}"]`).forEach(b=>b.classList.toggle("is-on", b===btn));
-    if(step===2){
-      track("CustomizeProduct", {content_name:"window_type_selected", funnel_step:2});
-      ph("quote_window_type_selected", {window_type:A.type});
-    } else if(step===3){
-      ph("quote_cleaning_sides_selected", {sides:A.sides});
+    if(key==="sides"){
+      ph("quote_clean_type_selected", {sides:A.sides});
+      setTimeout(()=>show(2), 190);
+    } else if(key==="count"){
+      ph("quote_window_count_selected", {count:A.count});
+    } else if(key==="grids"){
+      ph("quote_grids_selected", {grids:A.grids});
     }
-    setTimeout(()=>{ if(step===5) return; goNext(); }, 190);
   });
 });
 
-// multi-select extras
-$$("[data-toggle]").forEach(btn=>{
+// S2 → S3: both the count and grids questions must be answered
+$$("[data-next]").forEach(btn=>{
   btn.addEventListener("click", ()=>{
-    const k = btn.dataset.toggle;
-    A[k] = !A[k];
-    btn.classList.toggle("is-on", A[k]);
-    if(step===4){
-      track("AddToCart", {content_name:`${k}_toggled`, funnel_step:4});
-      ph("quote_extra_toggled", {extra:k, enabled:A[k]});
+    if(step===2 && (!A.count || !A.grids)){
+      $("#step2Err").style.display = "block";
+      $("#step2Err").scrollIntoView({block:"center", behavior:"smooth"});
+      return;
     }
+    $("#step2Err").style.display = "none";
+    show(step+1);
   });
 });
-
-// stepper
-const countEl = $("#count");
-function setCount(v){
-  A.count = Math.max(1, Math.min(200, v));
-  countEl.textContent = A.count;
-  $$(".chip[data-count]").forEach(c=>c.classList.toggle("is-on", +c.dataset.count===A.count));
-  if(step===1){
-    track("AddToCart", {content_name:"window_count_selected", funnel_step:1, value:A.count});
-    ph("quote_window_count_changed", {count:A.count});
-  }
-}
-$("#plus").addEventListener("click", ()=>setCount(A.count+1));
-$("#minus").addEventListener("click", ()=>setCount(A.count-1));
-$$(".chip[data-count]").forEach(c=>c.addEventListener("click", ()=>setCount(+c.dataset.count)));
-setCount(12);
-
-// nav
-function goNext(){ const n = nextFrom(step); if(n===5) buildEstimate(); show(n); }
-$$("[data-next]").forEach(b=>b.addEventListener("click", goNext));
 $$("[data-back]").forEach(b=>b.addEventListener("click", ()=>show(prevFrom(step))));
 
 /* --- the math --- */
-function calc(){
-  const rate = PRICING.perWindow[A.type || "unsure"];
-  const lines = [];
-  let base = rate * A.count;
-  lines.push([`${A.count} windows · ${labelType(A.type)}`, base]);
-
-  if(A.sides==="both"){
-    lines.push(["Inside cleaning (flat rate)", PRICING.interior]);
-    base += PRICING.interior;
-  }
-  if(A.screens){ const s = PRICING.screens * A.count; lines.push(["Screens cleaned", s]); base += s; }
-  if(A.tracks){  const t = PRICING.tracks  * A.count; lines.push(["Tracks & sills detailed", t]); base += t; }
-
-  if(base < PRICING.minimum){
-    lines.push(["Minimum job charge", PRICING.minimum - base]);
-    base = PRICING.minimum;
-  }
-  if(A.gutters) lines.push(["Gutters", null]);
-  return {lines, low:Math.round(base/5)*5, high:Math.round((base*1.14)/5)*5};
+function estimateRange(){
+  if(!A.count || A.count==="unsure") return {unsure:true};
+  const sideKey = A.sides==="both" ? "both" : "out";
+  const gridKey = A.grids==="many" ? "many" : "lowgrids"; // none/few/unsure → no/few-grids range
+  const [low, high] = PRICING[sideKey][gridKey][A.count];
+  return {unsure:false, low, high, startingAt:A.count==="b4"};
 }
-function labelType(t){
-  return {single:"one big pane", hung:"two panes", grid:"grid", french:"divided panes", unsure:"standard"}[t] || "standard";
-}
-
-function buildEstimate(){
-  // Price isn't shown to the customer anymore — we still compute it here
-  // so the value flows to the ad pixels (for bid optimization) and into
-  // the lead payload for whoever calls them back.
-  const r = calc();
-  track("ViewContent", {content_name:"estimate_shown", value:r.low, currency:"USD", funnel_step:5});
-  ph("quote_estimate_viewed", {
-    low:r.low, high:r.high, windows:A.count, window_type:A.type, sides:A.sides,
-    screens:A.screens, tracks:A.tracks, gutters:A.gutters
-  });
-  return r;
+function estimateText(r){
+  if(r.unsure) return "We'll confirm your exact estimate when we follow up.";
+  if(r.startingAt) return `Your estimate: starting around ${money(r.low)}`;
+  return `Your estimate: ${money(r.low)}–${money(r.high)}`;
 }
 
 /* --- submit --- */
 $("#submitBtn").addEventListener("click", async ()=>{
   const fields = [
     ["#f-name", v=>v.trim().length>=2],
-    ["#f-phone", v=>v.replace(/\D/g,"").length>=10]
+    ["#f-phone", v=>v.replace(/\D/g,"").length>=10],
+    ["#f-address", v=>v.trim().length>=5],
+    ["#f-email", v=>v.trim()==="" || /\S+@\S+\.\S+/.test(v.trim())] // optional
   ];
   let ok = true, first = null;
   fields.forEach(([sel,test])=>{
@@ -1203,13 +1137,19 @@ $("#submitBtn").addEventListener("click", async ()=>{
   });
   if(!ok){ first.focus(); first.scrollIntoView({block:"center", behavior:"smooth"}); return; }
 
-  const est = calc();
+  const est = estimateRange();
+  const estimateStr = est.unsure ? "To be confirmed"
+    : est.startingAt ? `Starting around ${money(est.low)}`
+    : `${money(est.low)}–${money(est.high)}`;
   const payload = {
     name:$("#f-name").value.trim(),
     phone:$("#f-phone").value.trim(),
-    windows:A.count, windowType:A.type, sides:A.sides,
-    screens:A.screens, tracks:A.tracks, gutters:A.gutters,
-    estimate: `${money(est.low)}–${money(est.high)}`,
+    address:$("#f-address").value.trim(),
+    email:$("#f-email").value.trim(),
+    cleanType:SIDE_LABELS[A.sides] || A.sides,
+    windowCount:COUNT_LABELS[A.count] || A.count,
+    grids:GRID_LABELS[A.grids] || A.grids,
+    estimate: estimateStr,
     source:"meta-ads-landing", submittedAt:new Date().toISOString(),
     _subject: `New quote request — ${$("#f-name").value.trim() || "no name"}` // Formspree email subject
   };
@@ -1217,6 +1157,8 @@ $("#submitBtn").addEventListener("click", async ()=>{
   const btn = $("#submitBtn");
   btn.textContent = "Sending…"; btn.disabled = true;
 
+  // The lead is saved the moment this fires — they count as a lead whether
+  // or not a call/booking ever happens.
   if(BIZ.formEndpoint){
     try{
       const res = await fetch(BIZ.formEndpoint, {
@@ -1230,18 +1172,23 @@ $("#submitBtn").addEventListener("click", async ()=>{
     console.log("[LEAD — no endpoint set, no email will be sent]", payload);
   }
 
-  track("Purchase", {content_name:"booking_request", value:est.low, currency:"USD"});
-  // Main conversion event — the last step of the PostHog funnel. Identifying
-  // by phone links this person's whole prior anonymous session (all the
-  // quote_* events above) to a named lead, so you can look up their journey.
-  if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {phone:payload.phone});
-  ph("quote_booking_submitted", {
-    windows:payload.windows, window_type:payload.windowType, sides:payload.sides,
-    screens:payload.screens, tracks:payload.tracks, gutters:payload.gutters,
-    estimate:payload.estimate
+  // Tracked as its own event, separate from any future calendar-booking
+  // conversion event — this moment (contact info submitted) is the lead,
+  // regardless of whether a booking ever follows.
+  track("Lead", {content_name:"contact_submitted", value:est.unsure?undefined:est.low, currency:"USD"});
+  // Identifying by phone links this person's whole prior anonymous session
+  // (all the quote_* events above) to a named lead, so you can look up
+  // their journey.
+  if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {phone:payload.phone, name:payload.name});
+  ph("contact_submitted", {
+    name:payload.name, phone:payload.phone, address:payload.address, email:payload.email,
+    clean_type:A.sides, window_count:A.count, grids:A.grids, estimate:payload.estimate
   });
-  btn.textContent = "Call me with my price"; btn.disabled = false;
-  show(6); // fires the Lead event once via trackFunnelStep(6)
+
+  btn.textContent = "Get My Estimate"; btn.disabled = false;
+  $("#estimateLine").textContent = estimateText(est);
+  $("#estimateCaveat").style.display = est.unsure ? "none" : "block";
+  show(4);
   $("#fnBar").style.width = "100%";
 });
 </script>
