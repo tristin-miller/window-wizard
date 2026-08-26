@@ -395,6 +395,12 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 @media (min-width:640px){ .lp-testi-grid{grid-template-columns:repeat(3,1fr)} }
 
 /* ---------- 6. FUNNEL ---------- */
+/* centers the funnel card in the viewport while it's the active step —
+   collapses back to normal flow (no reserved height) once splash.hidden
+   goes back to false and the card gets [hidden] again */
+.fn-stage:has(.funnel:not([hidden])){
+  min-height:70svh;display:flex;align-items:center;justify-content:center;
+}
 .funnel{
   max-width:520px;margin:.7rem auto 0;background:var(--white);
   border-radius:20px;box-shadow:var(--shadow-lg);border:1px solid var(--rule);
@@ -759,6 +765,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       </div>
 
       <!-- ===== FUNNEL ===== -->
+      <div class="fn-stage">
       <div class="funnel" id="funnelCard" hidden>
         <div class="fn-bar"><i id="fnBar"></i></div>
         <div class="fn-body">
@@ -772,6 +779,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
               <button class="opt" data-set="sides" data-val="out"><span><strong>Exterior windows only</strong><small>Nobody needs to be home</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
               <button class="opt" data-set="sides" data-val="both"><span><strong>Inside + outside windows</strong><small>The full job — what most people book</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
             </div>
+            <div class="fn-nav"><button class="fn-back" type="button" data-back-splash>← Back</button></div>
           </section>
 
           <!-- S2 count + grids -->
@@ -831,6 +839,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
           </section>
 
         </div>
+      </div>
       </div>
 
       <p class="lp-foot">
@@ -1021,6 +1030,15 @@ route();
   }
   cta.addEventListener("click", startFunnel);
   $("#dockCta")?.addEventListener("click", startFunnel);
+
+  function backToSplash(){
+    ph("quote_funnel_back_to_splash");
+    funnelCard.hidden = true;
+    splash.hidden = false;
+    dock?.classList.toggle("is-visible", cta.getBoundingClientRect().top < 0);
+    splash.scrollIntoView({block:"start", behavior:"smooth"});
+  }
+  $$("[data-back-splash]").forEach(b=>b.addEventListener("click", backToSplash));
 
   // floating dock: shown once the splash's own CTA scrolls out of view
   // above the fold, hidden again when scrolling back up past it (and
