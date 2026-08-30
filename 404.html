@@ -795,7 +795,7 @@ function route(){
 
   $$("[data-route]").forEach(el=>el.classList.toggle("is-active", el.dataset.route===name));
   document.title = isQuote
-    ? "Get your window cleaning price — Window Wizard, Austin"
+    ? "Request your window cleaning price — Window Wizard, Austin"
     : "Window Wizard — Window Cleaning in Austin, TX";
   window.scrollTo(0,0);
   track(isQuote ? "ViewContent" : "PageView", {content_name:name});
