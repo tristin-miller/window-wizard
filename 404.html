@@ -394,6 +394,35 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 }
 @media (min-width:640px){ .lp-testi-grid{grid-template-columns:repeat(3,1fr)} }
 
+/* ---------- 5c. LANDING OFFER (free-cleaning ad page) ---------- */
+.offer-head h1{max-width:15ch}
+.offer-head .lede{font-size:1.02rem;max-width:32ch;margin:.7rem auto 0;color:var(--body)}
+
+.offer-ba{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin-top:1.8rem;border-radius:var(--r);overflow:hidden;box-shadow:var(--shadow-lg)}
+.offer-ba figure{position:relative;margin:0;aspect-ratio:3/4;background:var(--ink)}
+.offer-ba img{width:100%;height:100%;object-fit:cover}
+.offer-ba figcaption{
+  position:absolute;left:.5rem;bottom:.5rem;z-index:2;
+  background:rgba(11,27,43,.78);color:#fff;border-radius:999px;
+  padding:.3em .85em;font:700 .72rem/1 var(--sans);letter-spacing:.08em;text-transform:uppercase;
+}
+
+.offer-block{margin-top:2.4rem;text-align:center}
+.offer-block h2{font-size:1.5rem}
+.offer-block p{max-width:38ch;margin:.6rem auto 0}
+
+.offer-checklist{list-style:none;margin:1.4rem 0 0;padding:0;display:grid;gap:.7rem;text-align:left;max-width:320px;margin-inline:auto}
+.offer-checklist li{display:flex;align-items:center;gap:.75rem;font:600 1.02rem/1.3 var(--sans);color:var(--ink)}
+.offer-checklist .tick{
+  flex:none;width:26px;height:26px;border-radius:50%;background:var(--gold);color:var(--ink);
+  display:grid;place-items:center;font-weight:800;font-size:.95rem;
+}
+
+.offer-testi-grid{display:grid;gap:1rem;grid-template-columns:1fr;margin-top:1.4rem;text-align:left}
+@media (min-width:560px){ .offer-testi-grid{grid-template-columns:repeat(2,1fr)} }
+
+.offer-note{font-size:.85rem;color:#7b8896;max-width:38ch;margin:.9rem auto 0;text-align:center;line-height:1.5}
+
 /* ---------- 6. FUNNEL ---------- */
 /* centers the funnel card in the viewport while it's the active step —
    collapses back to normal flow (no reserved height) once splash.hidden
@@ -854,6 +883,110 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 </div>
 
 
+<!-- ============================================================
+     FREE-OFFER LANDING PAGE — Meta ads land here (/offer)
+     ============================================================ -->
+<div data-route="offer">
+  <div class="lp">
+    <div class="wrap">
+
+      <div class="lp-top"><span data-logo></span></div>
+
+      <div class="lp-head offer-head">
+        <p class="lp-badge">Austin Homeowners</p>
+        <h1>Yes, seriously.<br><em>I'll clean your front windows free.</em></h1>
+        <p class="lede">Up to 4 ground-level, front-facing exterior windows. No payment. No obligation.</p>
+      </div>
+
+      <a class="btn btn-gold btn-block lp-cta" href="#offer-form">
+        Claim my free cleaning
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+      </a>
+      <p class="lp-secure"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="4" y="10" width="16" height="10" rx="2"/><path d="M7 10V7a5 5 0 0 1 10 0v3"/></svg>Fast. Secure. No spam.</p>
+
+      <div class="offer-ba">
+        <figure><img data-photo="offerBefore" alt="A front window before cleaning, hazy and streaked"><figcaption>Before</figcaption></figure>
+        <figure><img data-photo="offerAfter" alt="The same front window after cleaning, streak-free and clear"><figcaption>After</figcaption></figure>
+      </div>
+
+      <div class="offer-block">
+        <p class="eyebrow" style="justify-content:center">Why free?</p>
+        <p>I want the chance to prove the quality of my work.</p>
+      </div>
+
+      <div class="offer-block">
+        <h2>What you get</h2>
+        <ul class="offer-checklist">
+          <li><span class="tick">✓</span> Up to 4 front windows</li>
+          <li><span class="tick">✓</span> Exterior, ground-level</li>
+          <li><span class="tick">✓</span> Streak-free clean</li>
+          <li><span class="tick">✓</span> $0</li>
+        </ul>
+      </div>
+
+      <div class="offer-block lp-proof">
+        <p class="eyebrow" style="justify-content:center">Trusted by Austin homeowners</p>
+        <div class="lp-stars"><span class="stars">★★★★★</span><b>5.0</b></div>
+        <p class="lp-stars-note">Based on <a href="https://share.google/IVeIGTMAFmksPqQTZ" target="_blank" rel="noopener noreferrer">4 Google reviews</a></p>
+        <div class="offer-testi-grid">
+          <div class="lp-testi">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6C4.87 8.1 3.5 10.7 3.5 13.5c0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L7.17 6Zm9.5 0c-2.3 2.1-3.7 4.7-3.7 7.5 0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L16.67 6Z"/></svg>
+            <p>"Did a very good job, was on time, and price as quoted no bait and switching."</p>
+            <cite>— Nathan Sadlowski</cite>
+          </div>
+          <div class="lp-testi">
+            <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7.17 6C4.87 8.1 3.5 10.7 3.5 13.5c0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L7.17 6Zm9.5 0c-2.3 2.1-3.7 4.7-3.7 7.5 0 2.9 1.9 4.9 4.3 4.9 1.9 0 3.4-1.4 3.4-3.3 0-1.8-1.3-3.1-3-3.1-.3 0-.6 0-.8.1.2-1.9 1.6-3.9 3.4-5.2L16.67 6Z"/></svg>
+            <p>"Professional. Polite. Proficient and thorough. Returning the following day to make certain everything was done to our satisfaction."</p>
+            <cite>— Mark Beames</cite>
+          </div>
+        </div>
+      </div>
+
+      <div class="offer-block">
+        <a class="btn btn-gold btn-block lp-cta" href="#offer-form">
+          Yes — clean my windows free
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M5 12h14M13 5l7 7-7 7"/></svg>
+        </a>
+        <p class="offer-note">Up to 4 accessible, ground-level, front-facing exterior windows. Additional services optional.</p>
+      </div>
+
+      <!-- ===== the actual submit page: name, phone, address ===== -->
+      <div class="funnel" id="offerForm">
+        <div class="fn-body">
+          <section class="fn-step is-active" id="offer-form">
+            <h2 class="fn-q">Claim your free cleaning</h2>
+            <p class="fn-help">Just a few details so we can get in touch and get it scheduled.</p>
+
+            <div class="field"><label for="of-name">First name</label><input id="of-name" type="text" autocomplete="given-name" placeholder="Jane"><p class="err">Please add your first name.</p></div>
+
+            <div class="field"><label for="of-phone">Mobile number</label><input id="of-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="next"><p class="err">Please add a mobile number we can reach you at.</p></div>
+
+            <div class="field"><label for="of-address">Street address</label><input id="of-address" type="text" autocomplete="street-address" placeholder="123 Main St, Austin, TX"><p class="err">Please add the address to be cleaned.</p></div>
+
+            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="offerSubmitBtn">Claim My Free Cleaning</button>
+            <p class="fn-note">No payment, no obligation. We'll text or call to schedule.</p>
+          </section>
+
+          <section class="fn-step" id="offer-done">
+            <div class="done">
+              <div class="seal"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              <h2>Request received!</h2>
+              <p>Thanks—we received your request. We'll be in touch soon to schedule your free cleaning.</p>
+              <a class="btn btn-gold btn-block" href="tel:+16085476456" data-phone-link style="margin-top:1rem">Or call us now: (608) 547-6456</a>
+            </div>
+          </section>
+        </div>
+      </div>
+
+      <p class="lp-foot">
+        Window Wizard · Austin, TX · Licensed &amp; insured<br>
+        Prefer to talk? <a href="tel:+16085476456" data-phone-link>(608) 547-6456</a>
+      </p>
+    </div>
+  </div>
+</div>
+
+
 <script>
 /* ============================================================
    ▼▼▼ EVERYTHING YOU EDIT IS IN THIS BLOCK ▼▼▼
@@ -878,7 +1011,9 @@ const PHOTOS = {
   work2: "images/IMG_2918.jpg",
   work3: "images/IMG_2946.jpg",
   work4: "images/IMG_2950.jpg",
-  work5: "images/IMG_2959.jpg"
+  work5: "images/IMG_2959.jpg",
+  offerBefore: "images/offer-before.jpg",
+  offerAfter:  "images/offer-after.jpg"
 };
 
 // ── PRICING ──────────────────────────────────────────────────
@@ -948,22 +1083,31 @@ function route(){
   const path = (location.pathname || "/").replace(/^\/+|\/+$/g, "").toLowerCase();
   const hash = (location.hash || "").replace(/^#\/?/, "").toLowerCase();
   const p = new URLSearchParams(location.search).get("p");
-  const isQuote = path === "quote" || path === "lp" || hash.startsWith("quote") || hash.startsWith("lp") || p === "quote";
-  const name = isQuote ? "quote" : "home";
+  const isOffer = path === "offer" || hash.startsWith("offer") || p === "offer";
+  const isQuote = !isOffer && (path === "quote" || path === "lp" || hash.startsWith("quote") || hash.startsWith("lp") || p === "quote");
+  const name = isOffer ? "offer" : isQuote ? "quote" : "home";
 
   if((hash.startsWith("quote") || hash.startsWith("lp")) && location.pathname !== "/quote"){
     history.replaceState({}, "", "/quote");
     return route();
   }
+  if(hash.startsWith("offer") && location.pathname !== "/offer"){
+    history.replaceState({}, "", "/offer");
+    return route();
+  }
 
   $$("[data-route]").forEach(el=>el.classList.toggle("is-active", el.dataset.route===name));
-  document.title = isQuote
+  document.title = isOffer
+    ? "Free Window Cleaning Offer — Window Wizard, Austin"
+    : isQuote
     ? "Request your window cleaning price — Window Wizard, Austin"
     : "Window Wizard — Window Cleaning in Austin, TX";
   window.scrollTo(0,0);
-  // Both routes are marketing/landing content at this point — the funnel
-  // itself (the thing ViewContent should mean) only starts once "Build my
-  // quote" is clicked, see the splash-cta handler below.
+  // All three routes are marketing/landing content at this point — the
+  // quote funnel itself (the thing ViewContent should mean there) only
+  // starts once "Build my quote" is clicked, see the splash-cta handler
+  // below. The /offer page has no separate splash/funnel split — its own
+  // form is always part of the page.
   track("PageView", {content_name:name});
   // Custom event, not $pageview: this is a single-page app that swaps
   // views via hash/history changes rather than a real navigation, and
@@ -971,6 +1115,7 @@ function route(){
   // very first load — a second manual $pageview here would double-count it.
   ph("page_viewed", {page:name});
   if(isQuote) ph("quote_splash_viewed");
+  if(isOffer) ph("offer_viewed");
 }
 addEventListener("hashchange", route);
 addEventListener("popstate", route);
@@ -1193,6 +1338,63 @@ $("#submitBtn").addEventListener("click", async ()=>{
   show(4);
   $("#fnBar").style.width = "100%";
 });
+
+/* ============================================================
+   /offer — free-cleaning ad landing page. One simple form
+   (name, phone, address), no multi-step funnel.
+   ============================================================ */
+(function(){
+  const btn = $("#offerSubmitBtn");
+  if(!btn) return;
+
+  btn.addEventListener("click", async ()=>{
+    const fields = [
+      ["#of-name", v=>v.trim().length>=2],
+      ["#of-phone", v=>v.replace(/\D/g,"").length>=10],
+      ["#of-address", v=>v.trim().length>=5]
+    ];
+    let ok = true, first = null;
+    fields.forEach(([sel,test])=>{
+      const el = $(sel), good = test(el.value);
+      el.closest(".field").classList.toggle("has-err", !good);
+      if(!good && !first) first = el;
+      ok = ok && good;
+    });
+    if(!ok){ first.focus(); first.scrollIntoView({block:"center", behavior:"smooth"}); return; }
+
+    const payload = {
+      name:$("#of-name").value.trim(),
+      phone:$("#of-phone").value.trim(),
+      address:$("#of-address").value.trim(),
+      source:"meta-ads-free-offer", submittedAt:new Date().toISOString(),
+      _subject: `New FREE cleaning claim — ${$("#of-name").value.trim() || "no name"}` // Formspree email subject
+    };
+
+    btn.textContent = "Sending…"; btn.disabled = true;
+
+    if(BIZ.formEndpoint){
+      try{
+        const res = await fetch(BIZ.formEndpoint, {
+          method:"POST",
+          headers:{"Content-Type":"application/json", "Accept":"application/json"},
+          body:JSON.stringify(payload)
+        });
+        if(!res.ok) console.error("Lead send failed", res.status, await res.text());
+      }catch(err){ console.error("Lead send failed", err); }
+    }else{
+      console.log("[LEAD — no endpoint set, no email will be sent]", payload);
+    }
+
+    track("Lead", {content_name:"offer_contact_submitted"});
+    if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {phone:payload.phone, name:payload.name});
+    ph("offer_contact_submitted", {name:payload.name, phone:payload.phone, address:payload.address});
+
+    btn.textContent = "Claim My Free Cleaning"; btn.disabled = false;
+    $$("#offerForm .fn-step").forEach(s=>s.classList.remove("is-active"));
+    $("#offer-done").classList.add("is-active");
+    $("#offerForm").scrollIntoView({block:"start", behavior:"smooth"});
+  });
+})();
 </script>
 
 </body>
