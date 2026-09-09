@@ -957,9 +957,18 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <div class="fn-stage">
       <div class="funnel" id="offerForm" hidden>
         <div class="fn-body">
-          <section class="fn-step is-active" id="offer-form">
+          <section class="fn-step is-active" id="offer-qualify">
+            <h2 class="fn-q">Are you ready to schedule your free window cleaning?</h2>
+            <div class="opts">
+              <button class="opt" type="button" id="offerReady"><span><strong>YES — I'M READY</strong></span></button>
+              <button class="opt" type="button" id="offerJustLooking"><span><strong>NO — JUST LOOKING</strong></span></button>
+            </div>
+            <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-splash>← Back</button></div>
+          </section>
+
+          <section class="fn-step" id="offer-form">
             <h2 class="fn-q">Claim your free cleaning</h2>
-            <p class="fn-help">Just a few details so we can get in touch and get it scheduled.</p>
+            <p class="fn-help">Enter your info and I'll text or call you to schedule.</p>
 
             <div class="field"><label for="of-name">First name</label><input id="of-name" type="text" autocomplete="given-name" placeholder="Jane"><p class="err">Please add your first name.</p></div>
 
@@ -967,9 +976,17 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 
             <div class="field"><label for="of-address">Street address</label><input id="of-address" type="text" autocomplete="street-address" placeholder="123 Main St, Austin, TX"><p class="err">Please add the address to be cleaned.</p></div>
 
-            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="offerSubmitBtn">Claim My Free Cleaning</button>
+            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="offerSubmitBtn">SCHEDULE MY FREE CLEANING</button>
             <p class="fn-note">No payment, no obligation. We'll text or call to schedule.</p>
-            <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-splash>← Back</button></div>
+            <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-qualify>← Back</button></div>
+          </section>
+
+          <section class="fn-step" id="offer-declined">
+            <div class="done">
+              <div class="seal"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
+              <h2>Thanks anyway!</h2>
+              <p>No worries — reach out whenever you're ready to schedule your free cleaning.</p>
+            </div>
           </section>
 
           <section class="fn-step" id="offer-done">
@@ -1355,12 +1372,18 @@ $("#submitBtn").addEventListener("click", async ()=>{
   const formCard = $("#offerForm");
   if(!splash || !formCard) return;
 
+  function showOfferStep(sel){
+    $$("#offerForm .fn-step").forEach(s=>s.classList.remove("is-active"));
+    $(sel).classList.add("is-active");
+    formCard.scrollIntoView({block:"start", behavior:"smooth"});
+  }
+
   function startOfferForm(){
     track("ViewContent", {content_name:"offer_form_started"});
     ph("offer_cta_clicked");
     splash.hidden = true;
     formCard.hidden = false;
-    formCard.scrollIntoView({block:"start", behavior:"smooth"});
+    showOfferStep("#offer-qualify");
   }
   $("#offerCta")?.addEventListener("click", startOfferForm);
   $("#offerCta2")?.addEventListener("click", startOfferForm);
@@ -1372,6 +1395,20 @@ $("#submitBtn").addEventListener("click", async ()=>{
     splash.scrollIntoView({block:"start", behavior:"smooth"});
   }
   $$("[data-back-offer-splash]").forEach(b=>b.addEventListener("click", backToOfferSplash));
+  $$("[data-back-offer-qualify]").forEach(b=>b.addEventListener("click", ()=>showOfferStep("#offer-qualify")));
+
+  // qualifying question — only a "yes" here ever reaches the contact
+  // fields, so declining never collects (or sends) any lead info and
+  // never fires the Lead conversion event.
+  $("#offerReady")?.addEventListener("click", ()=>{
+    ph("offer_qualify_ready");
+    showOfferStep("#offer-form");
+  });
+
+  $("#offerJustLooking")?.addEventListener("click", ()=>{
+    ph("offer_qualify_declined");
+    showOfferStep("#offer-declined");
+  });
 })();
 
 /* ============================================================
@@ -1424,7 +1461,7 @@ $("#submitBtn").addEventListener("click", async ()=>{
     if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {phone:payload.phone, name:payload.name});
     ph("offer_contact_submitted", {name:payload.name, phone:payload.phone, address:payload.address});
 
-    btn.textContent = "Claim My Free Cleaning"; btn.disabled = false;
+    btn.textContent = "SCHEDULE MY FREE CLEANING"; btn.disabled = false;
     $$("#offerForm .fn-step").forEach(s=>s.classList.remove("is-active"));
     $("#offer-done").classList.add("is-active");
     $("#offerForm").scrollIntoView({block:"start", behavior:"smooth"});
