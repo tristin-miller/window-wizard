@@ -958,10 +958,12 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
       <div class="funnel" id="offerForm" hidden>
         <div class="fn-body">
           <section class="fn-step is-active" id="offer-qualify">
+            <p class="fn-count">One quick question</p>
             <h2 class="fn-q">Are you ready to schedule your free window cleaning?</h2>
+            <p class="fn-help">Just so I know how to follow up.</p>
             <div class="opts">
-              <button class="opt" type="button" id="offerReady"><span><strong>YES — I'M READY</strong></span></button>
-              <button class="opt" type="button" id="offerJustLooking"><span><strong>NO — JUST LOOKING</strong></span></button>
+              <button class="opt" type="button" id="offerReady" data-set="ready" data-val="yes"><span><strong>YES — I'M READY</strong><small>Let's get it on the schedule</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+              <button class="opt" type="button" id="offerJustLooking" data-set="ready" data-val="no"><span><strong>NO — JUST LOOKING</strong><small>Not ready to schedule yet</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
             </div>
             <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-splash>← Back</button></div>
           </section>
@@ -1402,12 +1404,12 @@ $("#submitBtn").addEventListener("click", async ()=>{
   // never fires the Lead conversion event.
   $("#offerReady")?.addEventListener("click", ()=>{
     ph("offer_qualify_ready");
-    showOfferStep("#offer-form");
+    setTimeout(()=>showOfferStep("#offer-form"), 190);
   });
 
   $("#offerJustLooking")?.addEventListener("click", ()=>{
     ph("offer_qualify_declined");
-    showOfferStep("#offer-declined");
+    setTimeout(()=>showOfferStep("#offer-declined"), 190);
   });
 })();
 
