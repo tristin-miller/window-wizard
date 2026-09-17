@@ -953,42 +953,40 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
         </div>
       </div>
 
-      <!-- ===== FUNNEL — the actual submit screen: name, phone, address ===== -->
+      <!-- ===== FUNNEL — the actual submit screen: name, phone, address, then timing ===== -->
       <div class="fn-stage">
       <div class="funnel" id="offerForm" hidden>
         <div class="fn-body">
-          <section class="fn-step is-active" id="offer-qualify">
-            <p class="fn-count">One quick question</p>
-            <h2 class="fn-q">Are you ready to schedule your free window cleaning?</h2>
-            <p class="fn-help">Just so I know how to follow up.</p>
-            <div class="opts">
-              <button class="opt" type="button" id="offerReady" data-set="ready" data-val="yes"><span><strong>YES — I'M READY</strong><small>Let's get it on the schedule</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-              <button class="opt" type="button" id="offerJustLooking" data-set="ready" data-val="no"><span><strong>NO — JUST LOOKING</strong><small>Not ready to schedule yet</small></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
-            </div>
-            <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-splash>← Back</button></div>
-          </section>
-
-          <section class="fn-step" id="offer-form">
+          <section class="fn-step is-active" id="offer-form">
             <h2 class="fn-q">Claim your free cleaning</h2>
             <p class="fn-help">Enter your info and I'll text or call you to schedule.</p>
 
-            <div class="field"><label for="of-name">First name</label><input id="of-name" type="text" autocomplete="given-name" placeholder="Jane"><p class="err">Please add your first name.</p></div>
+            <div class="field"><label for="of-fname">First name</label><input id="of-fname" type="text" autocomplete="given-name" placeholder="Jane"><p class="err">Please add your first name.</p></div>
+
+            <div class="field"><label for="of-lname">Last name</label><input id="of-lname" type="text" autocomplete="family-name" placeholder="Doe"><p class="err">Please add your last name.</p></div>
 
             <div class="field"><label for="of-phone">Mobile number</label><input id="of-phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="(608) 547-6456" enterkeyhint="next"><p class="err">Please add a mobile number we can reach you at.</p></div>
 
             <div class="field"><label for="of-address">Street address</label><input id="of-address" type="text" autocomplete="street-address" placeholder="123 Main St, Austin, TX"><p class="err">Please add the address to be cleaned.</p></div>
 
-            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="offerSubmitBtn">SCHEDULE MY FREE CLEANING</button>
-            <p class="fn-note">No payment, no obligation. We'll text or call to schedule.</p>
-            <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-qualify>← Back</button></div>
+            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" type="button" id="offerContinueBtn">CONTINUE</button>
+            <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-splash>← Back</button></div>
           </section>
 
-          <section class="fn-step" id="offer-declined">
-            <div class="done">
-              <div class="seal"><svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3"><path d="M20 6 9 17l-5-5"/></svg></div>
-              <h2>Thanks anyway!</h2>
-              <p>No worries — reach out whenever you're ready to schedule your free cleaning.</p>
+          <section class="fn-step" id="offer-timing">
+            <p class="fn-count">One quick question</p>
+            <h2 class="fn-q">When would you prefer your free cleaning?</h2>
+            <div class="opts">
+              <button class="opt" type="button" data-timing="tomorrow"><span><strong>Tomorrow</strong></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+              <button class="opt" type="button" data-timing="next-few-days"><span><strong>In the next few days</strong></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+              <button class="opt" type="button" data-timing="later-this-week"><span><strong>Later this week</strong></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
+              <button class="opt" type="button" data-timing="next-week"><span><strong>Next week</strong></span><span class="tick"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M20 6 9 17l-5-5"/></svg></span></button>
             </div>
+            <p class="fn-err" id="offerTimingErr">Please choose when you'd prefer your cleaning.</p>
+
+            <button class="btn btn-gold btn-block" style="margin-top:1.3rem" id="offerSubmitBtn">SUBMIT</button>
+            <p class="fn-note">No payment, no obligation. We'll text or call to schedule.</p>
+            <div class="fn-nav"><button class="fn-back" type="button" data-back-offer-form>← Back</button></div>
           </section>
 
           <section class="fn-step" id="offer-done">
@@ -1366,8 +1364,9 @@ $("#submitBtn").addEventListener("click", async ()=>{
 
 /* ============================================================
    /offer — free-cleaning ad landing page. Same splash→reveal
-   pattern as /quote, but the revealed screen is one simple form
-   (name, phone, address) instead of a multi-step funnel.
+   pattern as /quote, but the revealed screen is a simple contact
+   form (name, phone, address) followed by a timing question,
+   instead of a multi-step funnel.
    ============================================================ */
 (function(){
   const splash = $("#offerSplash");
@@ -1385,7 +1384,7 @@ $("#submitBtn").addEventListener("click", async ()=>{
     ph("offer_cta_clicked");
     splash.hidden = true;
     formCard.hidden = false;
-    showOfferStep("#offer-qualify");
+    showOfferStep("#offer-form");
   }
   $("#offerCta")?.addEventListener("click", startOfferForm);
   $("#offerCta2")?.addEventListener("click", startOfferForm);
@@ -1397,33 +1396,15 @@ $("#submitBtn").addEventListener("click", async ()=>{
     splash.scrollIntoView({block:"start", behavior:"smooth"});
   }
   $$("[data-back-offer-splash]").forEach(b=>b.addEventListener("click", backToOfferSplash));
-  $$("[data-back-offer-qualify]").forEach(b=>b.addEventListener("click", ()=>showOfferStep("#offer-qualify")));
+  $$("[data-back-offer-form]").forEach(b=>b.addEventListener("click", ()=>showOfferStep("#offer-form")));
 
-  // qualifying question — only a "yes" here ever reaches the contact
-  // fields, so declining never collects (or sends) any lead info and
-  // never fires the Lead conversion event.
-  $("#offerReady")?.addEventListener("click", ()=>{
-    ph("offer_qualify_ready");
-    setTimeout(()=>showOfferStep("#offer-form"), 190);
-  });
-
-  $("#offerJustLooking")?.addEventListener("click", ()=>{
-    ph("offer_qualify_declined");
-    setTimeout(()=>showOfferStep("#offer-declined"), 190);
-  });
-})();
-
-/* ============================================================
-   /offer — free-cleaning ad landing page. One simple form
-   (name, phone, address), no multi-step funnel.
-   ============================================================ */
-(function(){
-  const btn = $("#offerSubmitBtn");
-  if(!btn) return;
-
-  btn.addEventListener("click", async ()=>{
+  // info page — validate name/phone/address, then move on to the
+  // timing question. Nothing is sent to the server until that step's
+  // submit button fires.
+  $("#offerContinueBtn")?.addEventListener("click", ()=>{
     const fields = [
-      ["#of-name", v=>v.trim().length>=2],
+      ["#of-fname", v=>v.trim().length>=2],
+      ["#of-lname", v=>v.trim().length>=2],
       ["#of-phone", v=>v.replace(/\D/g,"").length>=10],
       ["#of-address", v=>v.trim().length>=5]
     ];
@@ -1436,15 +1417,42 @@ $("#submitBtn").addEventListener("click", async ()=>{
     });
     if(!ok){ first.focus(); first.scrollIntoView({block:"center", behavior:"smooth"}); return; }
 
+    ph("offer_info_continue");
+    showOfferStep("#offer-timing");
+  });
+
+  // timing question — single-select
+  let offerTiming = null;
+  $$("#offerForm [data-timing]").forEach(btn=>{
+    btn.addEventListener("click", ()=>{
+      offerTiming = btn.dataset.timing;
+      $$("#offerForm [data-timing]").forEach(b=>b.classList.toggle("is-on", b===btn));
+      $("#offerTimingErr").style.display = "none";
+      ph("offer_timing_selected", {timing:offerTiming});
+    });
+  });
+
+  const submitBtn = $("#offerSubmitBtn");
+  submitBtn?.addEventListener("click", async ()=>{
+    if(!offerTiming){
+      $("#offerTimingErr").style.display = "block";
+      $("#offerTimingErr").scrollIntoView({block:"center", behavior:"smooth"});
+      return;
+    }
+
+    const firstName = $("#of-fname").value.trim();
+    const lastName = $("#of-lname").value.trim();
     const payload = {
-      name:$("#of-name").value.trim(),
+      firstName, lastName,
+      name:`${firstName} ${lastName}`.trim(),
       phone:$("#of-phone").value.trim(),
       address:$("#of-address").value.trim(),
+      timing:offerTiming,
       source:"meta-ads-free-offer", submittedAt:new Date().toISOString(),
-      _subject: `New FREE cleaning claim — ${$("#of-name").value.trim() || "no name"}` // Formspree email subject
+      _subject: `New FREE cleaning claim — ${firstName || "no name"}` // Formspree email subject
     };
 
-    btn.textContent = "Sending…"; btn.disabled = true;
+    submitBtn.textContent = "Sending…"; submitBtn.disabled = true;
 
     if(BIZ.formEndpoint){
       try{
@@ -1461,12 +1469,10 @@ $("#submitBtn").addEventListener("click", async ()=>{
 
     track("Lead", {content_name:"offer_contact_submitted"});
     if(typeof posthog!=="undefined" && posthog.identify) posthog.identify(payload.phone, {phone:payload.phone, name:payload.name});
-    ph("offer_contact_submitted", {name:payload.name, phone:payload.phone, address:payload.address});
+    ph("offer_contact_submitted", {name:payload.name, phone:payload.phone, address:payload.address, timing:payload.timing});
 
-    btn.textContent = "SCHEDULE MY FREE CLEANING"; btn.disabled = false;
-    $$("#offerForm .fn-step").forEach(s=>s.classList.remove("is-active"));
-    $("#offer-done").classList.add("is-active");
-    $("#offerForm").scrollIntoView({block:"start", behavior:"smooth"});
+    submitBtn.textContent = "SUBMIT"; submitBtn.disabled = false;
+    showOfferStep("#offer-done");
   });
 })();
 </script>
