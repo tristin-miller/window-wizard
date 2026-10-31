@@ -540,7 +540,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .wotm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
   padding:var(--gut);background:rgba(11,27,43,.62);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
 .wotm.is-open{opacity:1;visibility:visible}
-.wotm-card{position:relative;width:100%;max-width:min(400px,calc(100svh - 2*var(--gut) - 310px));max-height:calc(100svh - 2*var(--gut));overflow:auto;
+.wotm-card{position:relative;width:100%;max-width:min(400px,calc(100svh - 2*var(--gut) - 345px));max-height:calc(100svh - 2*var(--gut));overflow:auto;
   background:var(--white);border-radius:var(--r);box-shadow:var(--shadow-lg);
   transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .wotm.is-open .wotm-card{transform:none}
@@ -1509,7 +1509,7 @@ $("#submitBtn").addEventListener("click", async ()=>{
     <div class="wotm-body">
       <span class="wotm-badge">&#9733; Wizard of the Month</span>
       <h2 id="wotmTitle">Meet Zach</h2>
-      <p>Zach shows up on time, treats every home like it's his own, and doesn't leave until every pane is streak-free &mdash; screens, tracks and sills included.</p>
+      <p>Zach shows up on time, treats every home like it's his own, and doesn't leave until every pane is streak-free &mdash; screens, tracks and sills included. That&rsquo;s why he&rsquo;s our Wizard of the Month!</p>
       <button type="button" class="btn btn-gold btn-block" data-wotm-close>Nice to meet you!</button>
     </div>
   </div>
