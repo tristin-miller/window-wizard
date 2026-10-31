@@ -544,8 +544,8 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   background:var(--white);border-radius:var(--r);box-shadow:var(--shadow-lg);
   transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .wotm.is-open .wotm-card{transform:none}
-.wotm-photo{position:relative;display:block;width:100%;height:280px;object-fit:cover;object-position:50% 12%;border-radius:var(--r) var(--r) 0 0}
-.wotm-badge{position:absolute;left:1rem;top:236px;display:inline-flex;align-items:center;gap:.4em;
+.wotm-photo{display:block;width:100%;height:auto;aspect-ratio:800/788;border-radius:var(--r) var(--r) 0 0}
+.wotm-badge{display:inline-flex;margin-bottom:.8rem;align-items:center;gap:.4em;
   padding:.45em .9em;border-radius:999px;background:var(--gold);color:var(--ink);
   font:700 .82rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;box-shadow:var(--shadow)}
 .wotm-body{padding:1.5rem 1.4rem 1.4rem}
@@ -555,7 +555,6 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .wotm-x{position:absolute;top:.6rem;right:.6rem;z-index:1;width:44px;height:44px;border:0;border-radius:50%;
   background:rgba(11,27,43,.6);color:#fff;font:400 1.6rem/1 var(--sans);cursor:pointer}
 .wotm-x:hover{background:var(--ink)}
-@media (max-width:560px){.wotm-photo{height:230px}.wotm-badge{top:186px}}
 </style>
 </head>
 <body>
@@ -1506,8 +1505,8 @@ $("#submitBtn").addEventListener("click", async ()=>{
   <div class="wotm-card">
     <button type="button" class="wotm-x" data-wotm-close aria-label="Close">&times;</button>
     <img class="wotm-photo" src="images/wizard-of-the-month.jpg" alt="Our Wizard of the Month cleaning a window from a ladder" loading="lazy">
-    <span class="wotm-badge">&#9733; Wizard of the Month</span>
     <div class="wotm-body">
+      <span class="wotm-badge">&#9733; Wizard of the Month</span>
       <h2 id="wotmTitle">Meet our Wizard of the Month</h2>
       <p>He shows up on time, treats every home like it's his own, and doesn't leave until every pane is streak-free &mdash; screens, tracks and sills included.</p>
       <p>Customers keep asking for him by name, and he's always the first to lend the crew a hand. Thanks for everything you do!</p>
