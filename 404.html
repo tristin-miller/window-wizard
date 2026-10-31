@@ -540,7 +540,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .wotm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
   padding:var(--gut);background:rgba(11,27,43,.62);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
 .wotm.is-open{opacity:1;visibility:visible}
-.wotm-card{position:relative;width:100%;max-width:400px;max-height:calc(100svh - 2*var(--gut));overflow:auto;
+.wotm-card{position:relative;width:100%;max-width:min(400px,calc(100svh - 2*var(--gut) - 310px));max-height:calc(100svh - 2*var(--gut));overflow:auto;
   background:var(--white);border-radius:var(--r);box-shadow:var(--shadow-lg);
   transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.7,.3,1)}
 .wotm.is-open .wotm-card{transform:none}
@@ -555,6 +555,7 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
 .wotm-x{position:absolute;top:.6rem;right:.6rem;z-index:1;width:44px;height:44px;border:0;border-radius:50%;
   background:rgba(11,27,43,.6);color:#fff;font:400 1.6rem/1 var(--sans);cursor:pointer}
 .wotm-x:hover{background:var(--ink)}
+@media (max-height:640px){.wotm{--gut:12px}.wotm-body{padding:1rem 1rem 1.1rem}.wotm-body h2{font-size:1.3rem}.wotm-body p{font-size:.92rem;line-height:1.45}.wotm-badge{margin-bottom:.5rem;font-size:.72rem;white-space:nowrap}.wotm-card{max-width:min(400px,calc(100svh - 2*var(--gut) - 300px))}}
 </style>
 </head>
 <body>
@@ -1504,12 +1505,11 @@ $("#submitBtn").addEventListener("click", async ()=>{
 <div class="wotm" id="wotm" role="dialog" aria-modal="true" aria-labelledby="wotmTitle" aria-hidden="true">
   <div class="wotm-card">
     <button type="button" class="wotm-x" data-wotm-close aria-label="Close">&times;</button>
-    <img class="wotm-photo" src="images/wizard-of-the-month.jpg" alt="Our Wizard of the Month cleaning a window from a ladder" loading="lazy">
+    <img class="wotm-photo" src="images/wizard-of-the-month.jpg" alt="Zach, our Wizard of the Month, cleaning a window from a ladder" loading="lazy">
     <div class="wotm-body">
       <span class="wotm-badge">&#9733; Wizard of the Month</span>
-      <h2 id="wotmTitle">Meet our Wizard of the Month</h2>
-      <p>He shows up on time, treats every home like it's his own, and doesn't leave until every pane is streak-free &mdash; screens, tracks and sills included.</p>
-      <p>Customers keep asking for him by name, and he's always the first to lend the crew a hand. Thanks for everything you do!</p>
+      <h2 id="wotmTitle">Meet Zach</h2>
+      <p>Zach shows up on time, treats every home like it's his own, and doesn't leave until every pane is streak-free &mdash; screens, tracks and sills included.</p>
       <button type="button" class="btn btn-gold btn-block" data-wotm-close>Nice to meet you!</button>
     </div>
   </div>
