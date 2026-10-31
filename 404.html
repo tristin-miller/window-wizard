@@ -535,6 +535,27 @@ footer .fbrand{font-family:var(--display);font-size:1.2rem;color:var(--white);ma
   *,*::before,*::after{animation-duration:.001ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
   .wall figure:hover img{transform:none}
 }
+
+/* ---------- WIZARD OF THE MONTH POPUP ---------- */
+.wotm{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:var(--gut);background:rgba(11,27,43,.62);opacity:0;visibility:hidden;transition:opacity .25s,visibility .25s}
+.wotm.is-open{opacity:1;visibility:visible}
+.wotm-card{position:relative;width:100%;max-width:400px;max-height:calc(100svh - 2*var(--gut));overflow:auto;
+  background:var(--white);border-radius:var(--r);box-shadow:var(--shadow-lg);
+  transform:translateY(14px) scale(.98);transition:transform .3s cubic-bezier(.2,.7,.3,1)}
+.wotm.is-open .wotm-card{transform:none}
+.wotm-photo{position:relative;display:block;width:100%;height:280px;object-fit:cover;object-position:50% 12%;border-radius:var(--r) var(--r) 0 0}
+.wotm-badge{position:absolute;left:1rem;top:236px;display:inline-flex;align-items:center;gap:.4em;
+  padding:.45em .9em;border-radius:999px;background:var(--gold);color:var(--ink);
+  font:700 .82rem/1 var(--sans);letter-spacing:.06em;text-transform:uppercase;box-shadow:var(--shadow)}
+.wotm-body{padding:1.5rem 1.4rem 1.4rem}
+.wotm-body h2{margin:0 0 .6rem;font:600 1.6rem/1.15 var(--display);color:var(--ink)}
+.wotm-body p{margin:0 0 .8rem;color:var(--body);font-size:1rem;line-height:1.55}
+.wotm-body .btn{margin-top:.5rem}
+.wotm-x{position:absolute;top:.6rem;right:.6rem;z-index:1;width:44px;height:44px;border:0;border-radius:50%;
+  background:rgba(11,27,43,.6);color:#fff;font:400 1.6rem/1 var(--sans);cursor:pointer}
+.wotm-x:hover{background:var(--ink)}
+@media (max-width:560px){.wotm-photo{height:230px}.wotm-badge{top:186px}}
 </style>
 </head>
 <body>
@@ -1474,6 +1495,59 @@ $("#submitBtn").addEventListener("click", async ()=>{
     submitBtn.textContent = "SUBMIT"; submitBtn.disabled = false;
     showOfferStep("#offer-done");
   });
+})();
+</script>
+
+<!-- ============================================================
+     WIZARD OF THE MONTH — popup shown once per visit on the home page
+     (never on the /quote or /offer ad landing pages)
+     ============================================================ -->
+<div class="wotm" id="wotm" role="dialog" aria-modal="true" aria-labelledby="wotmTitle" aria-hidden="true">
+  <div class="wotm-card">
+    <button type="button" class="wotm-x" data-wotm-close aria-label="Close">&times;</button>
+    <img class="wotm-photo" src="images/wizard-of-the-month.jpg" alt="Our Wizard of the Month cleaning a window from a ladder" loading="lazy">
+    <span class="wotm-badge">&#9733; Wizard of the Month</span>
+    <div class="wotm-body">
+      <h2 id="wotmTitle">Meet our Wizard of the Month</h2>
+      <p>He shows up on time, treats every home like it's his own, and doesn't leave until every pane is streak-free &mdash; screens, tracks and sills included.</p>
+      <p>Customers keep asking for him by name, and he's always the first to lend the crew a hand. Thanks for everything you do!</p>
+      <button type="button" class="btn btn-gold btn-block" data-wotm-close>Nice to meet you!</button>
+    </div>
+  </div>
+</div>
+
+<script>
+(function(){
+  const KEY = "wotm_seen";
+  const modal = document.getElementById("wotm");
+  if(!modal) return;
+  const path = (location.pathname || "/").replace(/^\/+|\/+$/g, "").toLowerCase();
+  const hash = (location.hash || "").replace(/^#\/?/, "").toLowerCase();
+  const p = new URLSearchParams(location.search).get("p");
+  const isLanding = ["quote","lp","offer"].some(r => path === r || hash.startsWith(r) || p === r);
+  if(isLanding) return;
+  try{ if(sessionStorage.getItem(KEY)) return; }catch(e){}
+
+  let lastFocus = null;
+  function close(){
+    modal.classList.remove("is-open");
+    modal.setAttribute("aria-hidden","true");
+    document.removeEventListener("keydown", onKey);
+    if(lastFocus) lastFocus.focus();
+  }
+  function onKey(e){ if(e.key === "Escape") close(); }
+  function open(){
+    lastFocus = document.activeElement;
+    modal.classList.add("is-open");
+    modal.setAttribute("aria-hidden","false");
+    document.addEventListener("keydown", onKey);
+    modal.querySelector(".wotm-x").focus();
+    try{ sessionStorage.setItem(KEY, "1"); }catch(e){}
+  }
+  modal.addEventListener("click", e => {
+    if(e.target === modal || e.target.closest("[data-wotm-close]")) close();
+  });
+  setTimeout(open, 1200);
 })();
 </script>
 
